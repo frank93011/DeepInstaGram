@@ -1,0 +1,29 @@
+body{
+	margin: 0;
+}
+
+#discription-container{
+	display: flex;
+	justify-content: center;
+	margin: 10vw;
+	background: yellow;
+	margin-bottom: 2vw;
+}
+
+#intro{
+	margin: 24px;
+}
+
+#button-container{
+	display: flex;
+	width: 100vw;
+	justify-content: center;
+}
+#button-container>button{
+	font-size: 50px;
+}
+
+#homepage-photo{
+	display: flex;
+	justify-content: center;
+}

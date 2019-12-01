@@ -1,0 +1,25 @@
+body{
+	margin: 0;
+}
+
+#intro-container{
+	display: flex;
+	justify-content: center;
+	margin: 10vw;
+	background: yellow;
+	margin-bottom: 2vw;
+}
+
+#intro{
+	margin: 24px;
+}
+
+#explore-container{
+	display: flex;
+	width: 100vw;
+	justify-content: center;
+}
+#explore-container>button{
+	font-size: 48px;
+
+}
