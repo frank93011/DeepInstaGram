@@ -1,5 +1,6 @@
 body{
 	margin: 0;
+	background-color: #34317e;
 }
 
 #discription-container{
@@ -16,11 +17,59 @@ body{
 
 #button-container{
 	display: flex;
-	width: 100vw;
-	justify-content: center;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.29);
+	padding: 10px 50px 10px 50px
+}
+#projectName{
+	font-size: 40px;
+	color: white;
+	margin: 0 0 0 0;
 }
 #button-container>button{
-	font-size: 50px;
+	background-color: transparent;
+	border-radius: 30%;
+	width: 15%;
+	height: 100%;
+	border-radius: 89px;
+	border: solid 6px #ffffff;
+	margin: 10px 20px 0 20px;
+}
+#button-container>button>a{
+	font-size: 20px;
+	color: white;
+	text-decoration: none;
+}
+#button-container>button:hover{
+	background-color: white;
+}
+#button-container>button:hover>a{
+	color:#1e1e65;
+}
+#personality{
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+#personality>.single_personality>a>img{
+	width: 150px;
+  height: 150px;
+  margin: 50px 40px 0 40px;
+}
+#personality>.single_personality>a>.title-2{
+	margin: 0px 40px 0 40px;
+	margin:auto;
+	width: 114px;
+	height: 46px;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: bold;
+	font-stretch: normal;
+	font-style: normal;
+	line-height: 1.21;
+	letter-spacing: 5.95px;
+	text-align: center;
+	color: #ffffff;
 }
 
-}
+
