@@ -19,7 +19,7 @@ from explore.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('homepage', homepage),
+    path('', homepage),
     path('intro', intro),
     path('Openness', Openness),
     path('Conscientiousness', Conscientiousness),
