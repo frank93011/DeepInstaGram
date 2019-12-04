@@ -3712,8 +3712,8 @@
 		-webkit-justify-content: center;
 		-ms-justify-content: center;
 		justify-content: center;
-		background-image: url("banner.jpg");
-		background-position: center;
+		background-image: url("asset/background.png");
+		background-position: left;
 		background-size: cover;
 		background-repeat: no-repeat;
 		border-top: 0;
@@ -3725,13 +3725,6 @@
 		overflow: hidden;
 	}
 
-		#banner .inner .Rectangle-5 {
-			width: 1920px;
-			height: 987px;
-			box-shadow: -6px 7px 18px 0 rgba(0, 0, 0, 0.53);
-			background-color: #34317e;
-			z-index: 0;
-		}
 
 		#banner .inner {
 			-moz-transform: scale(1.0);
