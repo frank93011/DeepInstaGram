@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="static/realize.css">
 </head>
 <body>
+<<<<<<< Updated upstream
 
 	<div id ="account-container">
 		<form action="" method="post">
@@ -26,5 +27,19 @@
 		<!-- <button type="button"><a href="/intro?page=1 ">登入</a></button> -->
 		<input type="submit" value="登入" />
 	</div>
+=======
+<div class="login-container">
+		<h1 class="title-1">登入</h1>
+		<form action="" method="post">
+			{% csrf_token %}
+            <label for="username">用戶名稱:</label>
+            <input type="text" name="username" value="" id="username"> <br />
+            <label for="password">用戶密碼:</label>
+            <input type="password" name="password" value="" id="password"> <br />
+            <input type="submit" value="登入" />
+        </form>
+		<a href="/realized "><img src="static/asset/signIn.png" style="cursor: pointer;"></a>
+    </div>
+>>>>>>> Stashed changes
 </body>
 </html>

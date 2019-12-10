@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+<<<<<<< Updated upstream
+=======
+from django.http import HttpResponseRedirect
+>>>>>>> Stashed changes
 from django.contrib import auth
 
 # Create your views here.
@@ -27,9 +31,42 @@ def login(request):
 
 def homepage(request):
 	return render(request, 'homepage.html')
+def login(request):
+
+    if request.user.is_authenticated(): 
+        return HttpResponseRedirect('/index/')
+
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    
+    user = auth.authenticate(username=username, password=password)
+
+    if user is not None and user.is_active:
+        auth.login(request, user)
+        return HttpResponseRedirect('/index/')
+    else:
+        return render_to_response('login.html')
+
 def intro(request):
 	p = request.GET['page']
 	data = {'gg': p+".html"}
+	if p == '3':
+		if request.user.is_authenticated == True: 
+			return HttpResponseRedirect('/realized')
+			#return render(request, 'realized.html', data)
+		#print('eee')
+		username = request.POST.get('username', '')
+		password = request.POST.get('password', '')
+
+		user = auth.authenticate(username=username, password=password)
+
+		if user is not None and user.is_active:
+			auth.login(request, user)
+			#return HttpResponseRedirect('/realized')
+			return render(request, 'realized.html', data)
+		# else:
+		# 	# return render_to_response('3.html')
+		# 	return HttpResponseRedirect('/intro?page=3')
 	'''if p not in ['1', '2','3','4']:
 		data = {'gg': "1.html"}
 	elif p=='2':
@@ -122,4 +159,32 @@ def Neuroticism(request):
 	data = {'option': ne[s]+".html"}
 	return render(request, 'Neuroticism.html', data)
 
+<<<<<<< Updated upstream
 from django.contrib.auth.mixins import LoginRequiredMixin
+=======
+def realized(request):
+	data = {'gg': "intro.html"}
+	print('hwhwhwhw')
+	return render(request, 'realized.html', data)
+	#return render(request, 'realized.html', data)
+	if request.user.is_authenticated == True: 
+		return HttpResponseRedirect('/realized')
+		#return render(request, 'realized.html', data)
+
+	username = request.POST.get('username', '')
+	password = request.POST.get('password', '')
+
+	user = auth.authenticate(username=username, password=password)
+
+	if user is not None and user.is_active:
+		auth.login(request, user)
+		#return HttpResponseRedirect('/realized')
+		return render(request, 'realized.html', data)
+	else:
+		# return render_to_response('3.html')
+		return HttpResponseRedirect('/intro?page=3')
+def logout(request):
+    auth.logout(request)
+    #return HttpResponseRedirect('/intro/')
+    return HttpResponseRedirect('/intro?page=1')
+>>>>>>> Stashed changes

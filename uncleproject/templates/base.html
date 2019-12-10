@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>intro</title>
+	<!-- <link rel="stylesheet" href="static/intro.css"> -->
+	<link href="static/intro.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<div id="button-container">
+		<img src="static/asset/logo_white_deep.png" style="width: 50px; height:50px;">
+		<div style="margin-left: 15%;"></div>
+		<button type="button"><a href="/intro?page=1 ">人格測驗介紹</a></button>
+		<button type="button"><a href="/intro?page=2&sub=1 ">五個小恐龍</a></button>
+		<button type="button"><a href="/intro?page=3 ">了解自我</a></button>
+
+		</div>
+	</div>
+	<div>
+		{% block content %}
+		{% if request.user.is_authenticated %}
+            <p>{{request.user}} 您已經登入囉</p>
+            <a href="/restaurants_list/">餐廳列表</a>
+    	{% else %}
+            <p>您尚未登入喔~<a href="/accounts/login/">登入</a></p>
+    	{% endif %}
+		{% endblock %}
+	</div>
+</body>
+</html>
+<style>
+#navbar_1{
+  width: 1920px;
+  height: 206px;
+  background-color: rgba(0, 0, 0, 0.29);
+}
+</style>
