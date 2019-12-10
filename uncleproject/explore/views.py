@@ -106,3 +106,7 @@ def Neuroticism(request):
 	s = request.GET['sub']
 	data = {'option': ne[s]+".html"}
 	return render(request, 'Neuroticism.html', data)
+
+def realized(request):
+	data = {'gg': "intro.html"}
+	return render(request, 'realized.html', data)
