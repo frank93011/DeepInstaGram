@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib import auth
 
 # Create your views here.
 # {'1': 'Openness', '2': 'Conscientiousness','3': 'Extraversion','4': 'Agreeableness','5': 'Neuroticism'}
@@ -9,6 +10,20 @@ con = {'1': 'C_introduction', '2': 'C_highscore','3': 'C_lowscore'}
 ex = {'1': 'E_introduction', '2': 'E_highscore','3': 'E_lowscore'}
 ag = {'1': 'A_introduction', '2': 'A_highscore','3': 'A_lowscore'}
 ne = {'1': 'N_introduction', '2': 'N_highscore','3': 'N_lowscore'}
+def login(request):
+    if request.user.is_authenticated(): 
+        return HttpResponseRedirect('/index/')
+
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    
+    user = auth.authenticate(username=username, password=password)
+
+    if user is not None and user.is_active:
+        auth.login(request, user)
+        return HttpResponseRedirect('/index/')
+    else:
+        return render_to_response('3.html')
 
 def homepage(request):
 	return render(request, 'homepage.html')
@@ -106,3 +121,5 @@ def Neuroticism(request):
 	s = request.GET['sub']
 	data = {'option': ne[s]+".html"}
 	return render(request, 'Neuroticism.html', data)
+
+from django.contrib.auth.mixins import LoginRequiredMixin
