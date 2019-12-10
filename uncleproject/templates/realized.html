@@ -1,8 +1,54 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
+<link href="{% static 'realize.css' %}" rel="stylesheet">
 <div class="block_container">
-    <h1>ddd</h1>
-    <div class="block_container"> </div>
+    <div class="minor_nav">
+        <button class="select_nav"><h5>分析總覽</h5></button>
+        <button class="select_nav"><h5 >問卷結果</h5></button>
+        <button class="select_nav"><h5 >群體分析</h5></button>
+    </div>
+    <div style="display: flex;">
+        <img class="profile_pic" src="static/asset/ope.png">
+        <div style="width: 80%;">
+            <h1 class="name">恐龍</h1>
+            <div style="display: flex;">
+                <div style="width: 30%;">
+                    <h1 class="name" style="font-size: 15px;">貼文數量</h1>
+                    <h1 class="name" style="font-size: 15px;">100</h1>
+                </div>
+                <div>
+                    <h1 class="name" style="font-size: 15px;">總共被按讚次數</h1>
+                    <h1 class="name" style="font-size: 15px;">300</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="align-items: center;">
+        <div style="margin: 15px;">
+            <div class="sub_title">
+                <h5>貼文意境 Style</h5>
+            </div>
+            <div class="display_container">
+            </div>
+        </div>
+        <div style="margin: 15px;">
+            <div class="sub_title">
+                <h5>貼文人格分析 Personality</h5>
+            </div>
+            <div class="display_container">
+            </div>
+        </div>
+        <div style="margin: 15px;">
+            <div class="sub_title">
+                <h5>貼文興趣分析 Hobbies</h5>
+            </div>
+            <div class="display_container">
+            </div>
+        </div>
 
+
+    </div>
+    
 </div>
 {% endblock %}
