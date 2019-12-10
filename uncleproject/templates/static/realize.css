@@ -49,11 +49,12 @@ h1{
 	outline: none;
 }
 .block_container{
-	width: 1097.8px;
+	/* width: 1097.8px;
 	height: 1696.4px;
 	opacity: 0.94;
 	box-shadow: 0 9px 20px 0 rgba(0, 0, 0, 0.16);
-	background-color: #ffffff;
+	background-color: #ffffff; */
+	background-color: green;
 }
 /* #account-container{
 	display: flex;
