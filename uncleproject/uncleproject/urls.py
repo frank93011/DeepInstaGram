@@ -26,5 +26,6 @@ urlpatterns = [
     path('Extraversion', Extraversion),
     path('Agreeableness', Agreeableness),
     path('Neuroticism', Neuroticism),
+    path('realized', realized)
 
 ]
