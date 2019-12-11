@@ -4,12 +4,14 @@ from django_mysql.models import ListCharField
 # Create your models here.
 
 class User(models.Model):
-	userID = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this user.")
-	igName = models.CharField(
-        help_text="the user's IG account :"
+    userID = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this user.")
+    igName = models.CharField(
+        help_text="the user's IG account :",
+        max_length=200,
     )
     userEmail = models.CharField(
-        help_text="the user's E-mail account :"
+        help_text="the user's E-mail account :",
+        max_length=200,
     )
     big5_openness = models.IntegerField()
     big5_conscientiousness = models.IntegerField()
@@ -27,22 +29,22 @@ class User(models.Model):
     hobby_game = models.IntegerField()
     hobby_visual = models.IntegerField()
 
-    style_hiking = models.IntegerField()
-    style_infant = models.IntegerField()
-    style_studying = models.IntegerField()
-    style_celebrate = models.IntegerField()
-    style_firework = models.IntegerField()
-    style_night club = models.IntegerField()
-    style_sports = models.IntegerField()
-    style_depressed = models.IntegerField()
-    style_lonely = models.IntegerField()
-    style_selfie = models.IntegerField()
-    style_building = models.IntegerField()
-    style_delicious = models.IntegerField()
-    style_books = models.IntegerField()
+    style_hiking = models.FloatField()
+    style_infant = models.FloatField()
+    style_studying = models.FloatField()
+    style_celebrate = models.FloatField()
+    style_firework = models.FloatField()
+    style_nightclub = models.FloatField()
+    style_sports = models.FloatField()
+    style_depressed = models.FloatField()
+    style_lonely = models.FloatField()
+    style_selfie = models.FloatField()
+    style_building = models.FloatField()
+    style_delicious = models.FloatField()
+    style_books = models.FloatField()
 
 
-    imgUrl = ListCharField(base_field = CharField(max_length=10))
+    imgUrl = ListCharField(base_field = models.CharField(max_length=2000), max_length=2000)
 
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
@@ -51,7 +53,8 @@ class User(models.Model):
 class Group(models.Model):
     groupID = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this user.")
     groupName = models.CharField(
-        help_text="the group's name :"
+        help_text="the group's name :",
+        max_length=200,
     )
     hobby_outdoor = models.IntegerField()
     hobby_water = models.IntegerField()
@@ -63,27 +66,27 @@ class Group(models.Model):
     hobby_game = models.IntegerField()
     hobby_visual = models.IntegerField()
 
-    big5_openness = models.IntegerField()
-    big5_conscientiousness = models.IntegerField()
-    big5_extraversion = models.IntegerField()
-    big5_agreeableness = models.IntegerField()
-    big5_neuroticism = models.IntegerField()
+    big5_openness = models.FloatField()
+    big5_conscientiousness = models.FloatField()
+    big5_extraversion = models.FloatField()
+    big5_agreeableness = models.FloatField()
+    big5_neuroticism = models.FloatField()
 
-    style_hiking = models.IntegerField()
-    style_infant = models.IntegerField()
-    style_studying = models.IntegerField()
-    style_celebrate = models.IntegerField()
-    style_firework = models.IntegerField()
-    style_night club = models.IntegerField()
-    style_sports = models.IntegerField()
-    style_depressed = models.IntegerField()
-    style_lonely = models.IntegerField()
-    style_selfie = models.IntegerField()
-    style_building = models.IntegerField()
-    style_delicious = models.IntegerField()
-    style_books = models.IntegerField()
+    style_hiking = models.FloatField()
+    style_infant = models.FloatField()
+    style_studying = models.FloatField()
+    style_celebrate = models.FloatField()
+    style_firework = models.FloatField()
+    style_nightclub = models.FloatField()
+    style_sports = models.FloatField()
+    style_depressed = models.FloatField()
+    style_lonely = models.FloatField()
+    style_selfie = models.FloatField()
+    style_building = models.FloatField()
+    style_delicious = models.FloatField()
+    style_books = models.FloatField()
     
-    imgUrl = ListCharField(base_field = CharField(max_length=10))
+    imgUrl = ListCharField(base_field = models.CharField(max_length=2000), max_length=2000)
 
     def __str__(self):
         return self.studentId

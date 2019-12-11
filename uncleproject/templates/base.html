@@ -13,6 +13,9 @@
 		<button type="button"><a href="/intro?page=1 ">人格測驗介紹</a></button>
 		<button type="button"><a href="/intro?page=2&sub=1 ">五個小恐龍</a></button>
 		<button type="button"><a href="/intro?page=3 ">了解自我</a></button>
+		{% if request.user.is_superuser %}
+		<button type="button"><a href="/intro?page=import ">載入資料庫</a></button>
+		{% endif %}
 		</div>
 	</div>
 	<div>

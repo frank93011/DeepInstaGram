@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib import auth
+import pickle
+import json
 
 # Create your views here.
 # {'1': 'Openness', '2': 'Conscientiousness','3': 'Extraversion','4': 'Agreeableness','5': 'Neuroticism'}
@@ -14,21 +16,6 @@ ne = {'1': 'N_introduction', '2': 'N_highscore','3': 'N_lowscore'}
 
 def homepage(request):
 	return render(request, 'homepage.html')
-def login(request):
-
-    if request.user.is_authenticated(): 
-        return HttpResponseRedirect('/index/')
-
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
-    
-    user = auth.authenticate(username=username, password=password)
-
-    if user is not None and user.is_active:
-        auth.login(request, user)
-        return HttpResponseRedirect('/index/')
-    else:
-        return render_to_response('login.html')
 
 def intro(request):
 	p = request.GET['page']
@@ -47,6 +34,15 @@ def intro(request):
 			auth.login(request, user)
 			#return HttpResponseRedirect('/realized')
 			return render(request, 'realized.html', data)
+
+	if p == 'import':
+		if request.user.is_superuser == True:
+			pic_file = open('user_personality', 'rb')
+			data = pickle.load(pic_file)
+			# data = json.dumps(data,ensure_ascii=False, sort_keys = False, indent = 4, separators=(',', ': '))
+			print(data['prediction_prob']['conscientiousness']['shizuku_jiang'])
+
+			return HttpResponseRedirect('/intro?page=1')
 		# else:
 		# 	# return render_to_response('3.html')
 		# 	return HttpResponseRedirect('/intro?page=3')
