@@ -40,13 +40,27 @@ h1{
 }
 .account_input{
 	background-color: #ffffff;
-	border-radius: 10%;
+	border-radius: 5px 10px 0px 5px;
 	display: block;
-	margin-left: 5%;
 	height: 7%;
 	width: 80%;
 	border: none;
 	outline: none;
+	width: 400px;
+	height: 40px;
+	opacity: 0.67;
+	box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.04);
+	margin: 10px;;
+}
+.sign_in_button{
+	width: 50%;
+	height: 20%;
+	border-radius: 84px;
+	box-shadow: 0 3px 38px 0 rgba(0, 0, 0, 0.07);
+	font-size: 20px;
+	color: white;
+	font-weight: bold;
+	margin:auto;
 }
 .block_container{
 	margin: auto;
@@ -110,7 +124,6 @@ h5{
   border-radius: 36px;
   box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.16);
   background-color: #ffffff;
-  opacity: 0.5;
 }
 input[type=submit] {
     background: url('static/asset/signIn.png');
