@@ -6,15 +6,15 @@
 </head>
 <body>
 <div class="login-container">
-		<h1 class="title-1">登入</h1>
+		<h1 class="title-1" style="margin: 20px;">登入</h1>
 		<form action="" method="post">
 			{% csrf_token %}
             <label for="username" class="title-2">帳戶 User Name / IG account:</label>
-            <input type="text" name="username" value="" id="username" style="width: 400px;height: 40px;opacity: 0.67;box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.04);"> <br />
+            <input class="account_input" type="text" name="username" value="" id="username" style="width: 400px;height: 40px;opacity: 0.67;box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.04);"> <br />
             <label for="password" class="title-2">密碼 Password / E-mail:</label>
-            <input type="password" name="password" value="" id="password" style="width: 400px;height: 40px;opacity: 0.67;box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.04);"> <br />
+            <input class="account_input" type="password" name="password" value="" id="password"> <br />
             <!-- <input type="submit" style="width:200px;height:60px;background-repeat: no-repeat;background-size: 100px;background-image:url(static/asset/signIn.png);" /> -->
-             <input type="submit" style="width: 213.8px;height: 66.7px;border-radius: 84px;box-shadow: 0 3px 38px 0 rgba(0, 0, 0, 0.07);background-color: #4fc793;font-family: Roboto;font-size: 27px;font-weight: 500;font-stretch: normalfont-style: normal;line-height: 1.22;letter-spacing: 3.08px;text-align: center;color: #ffffff; margin-top: 100px" value="Sign In" />
+             <input type="submit" class="sign_in_button" style="background-color: #4fc793;" value="Sign In" />
             
         </form>
        

@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib import auth
-
+import matplotlib.pyplot as plt; plt.rcdefaults()
+import numpy as np
+import matplotlib.pyplot as plt
 # Create your views here.
 # {'1': 'Openness', '2': 'Conscientiousness','3': 'Extraversion','4': 'Agreeableness','5': 'Neuroticism'}
 opt = {'1': 'behavior', '2': 'highscore','3': 'lowscore'}
@@ -141,10 +143,11 @@ def Neuroticism(request):
 	s = request.GET['sub']
 	data = {'option': ne[s]+".html"}
 	return render(request, 'Neuroticism.html', data)
-
+def test(request):
+	data = {'gg': "intro.html"}
+	return render(request, 'test.html', data)
 def realized(request):
 	data = {'gg': "intro.html"}
-	print('hwhwhwhw')
 	return render(request, 'realized.html', data)
 	#return render(request, 'realized.html', data)
 	if request.user.is_authenticated == True: 

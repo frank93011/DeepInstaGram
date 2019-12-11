@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepage),
     path('intro', intro),
+    path('test', test),
     path('Openness', Openness),
     path('Conscientiousness', Conscientiousness),
     path('Extraversion', Extraversion),
