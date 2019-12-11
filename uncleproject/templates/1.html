@@ -6,6 +6,12 @@
 </head>
 <body>
 	<div>
+		{% if request.user.is_authenticated %}
+            <p>{{request.user}} 您已經登入囉</p>
+            <a href="logout">登出</a>
+    	{% else %}
+            <p>您尚未登入喔~<a href="/intro?page=3">登入</a></p>
+    	{% endif %}
 		<h1>歷史</h1>
 		<h2>從1980年代開始，人格研究學家們在人格描述上取得了一個共識，提出了一個由五大因素所組成的人格模型，被稱為“大五人格”。</h2>
 	</div>

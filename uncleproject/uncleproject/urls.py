@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 from explore.views import *
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +27,9 @@ urlpatterns = [
     path('Extraversion', Extraversion),
     path('Agreeableness', Agreeableness),
     path('Neuroticism', Neuroticism),
-    path('realized', realized)
+    path('realized', realized),
+    path('logout', logout),
+    url(r'^accounts/logout/$',logout)
+
 
 ]

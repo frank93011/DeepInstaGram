@@ -7,10 +7,14 @@
 <body>
 <div class="login-container">
 		<h1 class="title-1">登入</h1>
-		<h1 class="title-2">帳號  User name or email</h1>
-		<input class="account_input" type="text">
-		<h1 class="title-2">密碼  Password</h1>
-		<input class="account_input" type="text">
+		<form action="" method="post">
+			{% csrf_token %}
+            <label for="username">用戶名稱:</label>
+            <input type="text" name="username" value="" id="username"> <br />
+            <label for="password">用戶密碼:</label>
+            <input type="password" name="password" value="" id="password"> <br />
+            <input type="submit" value="登入" />
+        </form>
 		<a href="/realized "><img src="static/asset/signIn.png" style="cursor: pointer;"></a>
     </div>
 </body>
