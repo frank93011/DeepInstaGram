@@ -39,9 +39,12 @@ def intro(request):
 
 	if p == 'import':
 		if request.user.is_superuser == True:
+			pic_file = open('user_data_new', 'rb')
+			user_data = pickle.load(pic_file)
 			pic_file = open('user_personality', 'rb')
-			data = pickle.load(pic_file)
+			user_personality = pickle.load(pic_file)
 			# data = json.dumps(data,ensure_ascii=False, sort_keys = False, indent = 4, separators=(',', ': '))
+			for i in user_personality
 			print(data['prediction_prob']['conscientiousness']['shizuku_jiang'])
 
 			return HttpResponseRedirect('/intro?page=1')
