@@ -1,45 +1,397 @@
 <!DOCTYPE html>
+{%load static%}
 <html lang="en">
+
+<link href="{% static 'five_dino.css' %}" rel="stylesheet">
 <head>
 	<meta charset="UTF-8">
 </head>
 <body>
 	
 	<div id="personality">
+
 		<div class="single_personality">
-			<a href="/Openness?sub=1">
-				<img src='static/asset/ope.png'>
-				<h1 class="title-2">經驗開放性</h1>
-			</a>
+			<input type="button" class="dino-button" id = "dino-con" onMouseOver="this.className='over'; "onMouseOut="this.className='dino-button';" onMouseDown="this.className = 'dino-button'; " onclick="display('cons')">
+			<h1 class="title-2">盡責性</h1>
 		</div>
+
 		<div class="single_personality">
-			<a href="/Conscientiousness?sub=1">
-				<img src='static/asset/con.png'>
-				<h1 class="title-2">盡責性</h1>
-			</a>
+			<input type="button" class="dino-button" id = "dino-ope" onMouseOver="this.className='over'; "onMouseOut="this.className='dino-button';" onMouseDown="this.className = 'dino-button';" onclick = "display('ope')">
+			<h1 class="title-2">經驗開放性</h1>
 		</div>
+
 		<div class="single_personality">
-			<a href="/Extraversion?sub=1">
-				<img src='static/asset/extra.png'>
-				<h1 class="title-2">外向性</h1>
-			</a>
+			<input type="button" class="dino-button" id = "dino-agr" onMouseOver="this.className='over'; "onMouseOut="this.className='dino-button';" onMouseDown="this.className = 'dino-button';" onclick = "display('agr')">
+			<h1 class="title-2">親和性</h1>
 		</div>
+
 		<div class="single_personality">
-			<a href="/Agreeableness?sub=1">
-				<img src='static/asset/con.png'>
-				<h1 class="title-2">親和性</h1>
-			</a>
+			<input type="button" class="dino-button" id = "dino-extra" onMouseOver="this.className='over'; "onMouseOut="this.className='dino-button';" onMouseDown="this.className = 'dino-button';" onclick = "display('extra')">
+			<h1 class="title-2">外向性</h1>
 		</div>
+
 		<div class="single_personality">
-			<a href="/Neuroticism?sub=1">
-				<img src='static/asset/con.png'>
-				<h1 class="title-2">神經質</h1>
-			</a>
+			<input type="button" class="dino-button" id = "dino-neu" onMouseOver="this.className='over'; "onMouseOut="this.className='dino-button';" onMouseDown="this.className = 'dino-button';" onclick = "display('neu')">
+			<h1 class="title-2">神經質</h1>
 		</div>
 	</div>	
-	<div>
-		{{personality}}
+	<div id = 'extend_cons' style = "display: none" >
+		<div class = 'round' style = "	background-color: #361155;">
+			<img src = 'static/asset/cons-b.png' class = 'window-dino'>
+		</div>
+		<div class = 'window-head' >
+			<h1>盡責性</h1>
+			<h1>Conscientiousness</h1>
+		</div>
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/star.png'>
+				</div>
+				<h1>主要介紹 Summary</h1>
+			</div>
+			<p>
+				盡責性 (Conscientiousness)是大五人格中的一個心理學概念，可以用來衡量一個人做事情的細心程度、做的事情是否符合道德標準、對於自我要求的程度等與影響到自己做事情的效率及成果有關的人格特質。
+			</p>
+			<p>
+                盡責性也是呈現常態分佈，只有少數人能夠分佈在極高分及極低分，大多數人會集中在平均數左右。在雷蒙德·卡特爾的十六種人格因素模型中，它還包括「規則意識」和「完美主義」的具體特質。許多與盡責性相關的行為在廣義上屬於情商的範疇。
+
+			</p>
+		</div>
+
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/high.png'>
+				</div>
+				<h1>高分特點 Summary</h1>
+			</div>
+			<p></p>
+			<p>
+				在此項人格特質中獲得高分的人，做事情會比獲得低分者會很有效率，但是在極端狀況下，而且完成度會比獲得低分者還高。因為這類型的人具有以下人格特質：
+			</p>
+			<p>
+			● 做事有條理，有原則<br>
+			● 有責任感<br>
+			● 一絲不苟<br>
+			● 自律<br>
+			</p>
+			<p>
+				如果你在這個領域獲得高分的話，那代表你在學業表現及工作表現上會有不錯的表現，但是在極端狀況的時候，你可能會變成過度的完美主義者、偏執狂、工作狂或是強迫行為者。
+			</p>
+		</div>
+
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/low.png'>
+				</div>
+				<h1>低分特點 Summary</h1>
+			</div>
+			<p></p>
+			<p>
+				在此項人格特質中獲得低分的人，做事情會比較隨性，但是在面對挑戰的時候會比普通人更有彈性，也比較不會被挫折所打敗。因為這類型的人具有以下人格特質：
+			</p>
+			<p>
+			● 凡事順其自然<br>
+			● 應變能力強<br>
+			● 無拘無束<br>
+			● 悠閒生活<br>
+			● 想法彈性<br>
+			</p>
+			<p>
+				如果你在這個領域獲得低分的話，代表你嚮往的是自由自在、無拘無束的生活，生活壓力也會比獲得高分者還要少，當遇到困難的時候也比較能夠調適好自己的心情。
+
+			</p>
+		</div>
+
 	</div>
+
+	<div id = 'extend_ope' style = "display: none" >
+		<div class = 'round' style = "	background-color: #0d592e; ">
+			<img src = 'static/asset/ope-b.png' class = 'window-dino'>
+		</div>
+		<div class = 'window-head' >
+			<h1>經驗開放性</h1>
+			<h1>Openness</h1>
+		</div>
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/star.png'>
+				</div>
+				<h1>主要介紹 Summary</h1>
+			</div>
+			<p>
+				經驗開放性 (Openness to experience)是大五人格中的一個心理學概念，可以用來衡量一個人是否具備強大的好奇心、活躍的想像力、驚人的創造力等與藝術有關的人格特質。
+			</p>
+			<p>
+                經驗開放性通常呈現常態分佈，只有少數人能夠分佈在極高分跟極低分，大多數人會集中在平均數左右。而經驗開放性程度較低者會被認為是「經驗封閉」，在行事及想法上會比較傳統，喜歡熟悉的事物，對於新的事物會比較抗拒，興趣較為專一。
+
+			</p>
+		</div>
+
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/high.png'>
+				</div>
+				<h1>高分特點 Summary</h1>
+			</div>
+			<p></p>
+			<p>
+				在此項人格特質中獲得高分的人，在生活中很容易被未知與挑戰所吸引，勇於去探索各種生活方式。因為這類型的人具有以下幾種人格特質：
+			</p>
+			<p>
+			● 充滿好奇心<br>
+			● 具有廣泛興趣<br>
+			● 富有創造力<br>
+			● 想法前瞻<br>
+			● 具備想像力<br>
+			</p>
+			<p>
+				如果你在這個領域獲得高分的話，那代表你很適合從事創作這方面的工作，例如藝術家、發明家、導演。
+			</p>
+		</div>
+
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/low.png'>
+				</div>
+				<h1>低分特點 Summary</h1>
+			</div>
+			<p></p>
+			<p>
+				在此項人格特質中獲得低分的人，在生活中會比得到高分的人踏實，對於事情必須要有足夠的動機才會去實踐。因為這類型的人具有以下幾種人格特質：
+			</p>
+			<p>
+			● 安於現狀<br>
+			● 腳踏實地<br>
+			● 興趣專一<br>
+			● 缺乏藝術<br>
+			● 害怕改變<br>
+			</p>
+			<p>
+				如果你在這個領域獲得低分的話，那代表你適合從事沒有太大變化的工作，例如：公務員、上班族。
+
+			</p>
+		</div>
+
+	</div>
+
+	<div id = 'extend_agr' style = "display: none" >
+		<div class = 'round' style = "background-color: #151c51">
+			<img src = 'static/asset/agr-b.png' class = 'window-dino'>
+		</div>
+		<div class = 'window-head' >
+			<h1>親和性</h1>
+			<h1>Agreeableness</h1>
+		</div>
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/star.png'>
+				</div>
+				<h1>主要介紹 Summary</h1>
+			</div>
+			<p>
+				親和性 (Agreeableness)是大五人格中的一個心理學概念，可以衡量一個人在社交場合中是否能夠感受愉快及包容的能力，也能夠反映出一個人在合作與社會方面的個體差異，而這項得分與個人在人際關係方面的能力息息相關。親和性通常被認為是一種上級特質，代表它是由一組具體的人格特質群集所統計出來的，在大多數的情況下，會關心他人的高分者也往往會與被他們關心的人合作並且幫助且信任他們！而這個人格維度是在使用因素分析方法進行研究的時候第一次被發現的。研究顯示，在大五人格特質中，只有親和性是和創業精神呈現負向關係。
+			</p>
+		</div>
+
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/high.png'>
+				</div>
+				<h1>高分特點 Summary</h1>
+			</div>
+			<p></p>
+			<p>
+				在此項人格特質中獲得高分的人，代表你喜歡與人相處，並且具備良好的察言觀色的能力，在各種環境下，都能夠利用自己敏銳的情緒來判斷他人的需求。因為這類型的人具有以下人格特質：
+			</p>
+			<p>
+			● 樂於助人<br>
+			● 信任他人<br>
+			● 善解人意<br>
+			● 無私<br>
+			● 寬容<br>
+			</p>
+			<p>
+				如果你在此項人格特質中獲得高分的話，代表你很適合從事與人談判的職業，例如：人力資源專家、心理學家。
+			</p>
+		</div>
+
+		<div class = 'window-text' style = "height:630px">
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/low.png'>
+				</div>
+				<h1>低分特點 Summary</h1>
+			</div>
+			<p></p>
+			<p>
+				在此項人格特質中獲得低分的人，代表你在與人相處的時候比較消極，除非逼不得已，不然會避免去與人交談，也很少主動去幫助他人，對於人與人之間微妙的互動欠缺覺察的能力，也會叫憤世嫉俗。因為這類型的人具有以下人格特質：
+			</p>
+			<p>
+			● 冷漠<br>
+			● 憤世嫉俗<br>
+			● 生性多疑<br>
+			● 直言不諱<br>
+			● 對人苛刻<br>
+			</p>
+			<p>
+				如果你在此項人格特質中獲得低分的話，代表你很適合自己一個人相處或是適合不需要迎合他人的職業，例如：危機處理專家、創業家。
+
+			</p>
+		</div>
+	</div>
+
+	<div id = 'extend_extra' style = "display: none" >
+		<div class = 'round' style = "background-color: #4d1919">
+			<img src = 'static/asset/extra-b.png' class = 'window-dino'>
+		</div>
+		<div class = 'window-head' >
+			<h1>外向性</h1>
+			<h1>Extraversion</h1>
+		</div>
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/star.png'>
+				</div>
+				<h1>主要介紹 Summary</h1>
+			</div>
+			<p>
+				外向性 (Extraversion)是大五人格中的一個心理學概念，可以用來一個人樂於參加活動的程度，就像大家小大一的時候如果都有參加宿營之類的活動的話，那就代表你可能是一個外向性的人喔。
+			</p>
+			<p>
+                外向性也可以用來衡量一個人對於事物是不是都充滿著熱情，例如你可能很常投入精力在舉辦一些活動，而通常這類型的人也會透過大量的談話來表現出自己自信能幹的樣子，而這種人通常也是具有高度外向性的人格特質！
+
+			</p>
+		</div>
+
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/high.png'>
+				</div>
+				<h1>高分特點 Summary</h1>
+			</div>
+			<p></p>
+			<p>
+				在此項人格特質中獲得高分的人，做事情會比較有熱情，也比較能夠跟大家打成一片。因為這類型的人具有以下人格特質：
+			</p>
+			<p>
+			● 對生活充滿熱情<br>
+			● 容易跟大家打成一片<br>
+			● 展現出強大的自信心<br>
+			● 喜歡參加社交活動<br>
+			● 喜歡的人事物廣<br>
+			</p>
+			<p>
+				如果你在此項人格特質中獲得高分的話，代表你很適合從事與人互動的職業，例如：業務員、政治人物、公關。
+			</p>
+		</div>
+
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/low.png'>
+				</div>
+				<h1>低分特點 Summary</h1>
+			</div>
+			<p></p>
+			<p>
+				在此項人格特質中獲得低分的人，會比較喜歡一個人獨處，也比較不會向大家展示自己。因為這類型的人具有以下人格特質：
+			</p>
+			<p>
+			● 做事從容<br>
+			● 容易專注<br>
+			● 沉著穩重<br>
+			● 獨立自主<br>
+			● 較缺乏社交能力<br>
+			</p>
+			<p>
+				如果你在此項人格特質中獲得低分的話，代表你很適合從事比較不用與人互動的職業，例如：工程師、科學家。
+
+			</p>
+		</div>
+	</div>
+
+	<div id = 'extend_neu' style = "display: none" >
+		<div class = 'round'style = "background-color: #000766">
+			<img src = 'static/asset/neu-b.png' class = 'window-dino'>
+		</div>
+		<div class = 'window-head' >
+			<h1>神經質</h1>
+			<h1>Neuroticism</h1>
+		</div>
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/star.png'>
+				</div>
+				<h1>主要介紹 Summary</h1>
+			</div>
+			<p>
+				神經質 (Neuroticism) 是大五人格中的一個心理學概念，可以用來衡量一個人擁有以下情緒的強烈程度：焦慮、擔憂、害怕、憤怒、挫折、羨慕、嫉妒、孤獨、憂鬱、內疚、自責等負面情緒及控制自己情緒的能力，與情緒商數(EQ)具有高度相關。
+			</p>
+		</div>
+
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/high.png'>
+				</div>
+				<h1>高分特點 Summary</h1>
+			</div>
+			<p></p>
+			<p>
+				在此項人格特質中獲得高分的人，通常抗壓性較差，在面對困難的時候會比獲得低分者情緒更容易失控，對生活中的改變也更加敏感，因為這類型的人具有以下人格特質：
+			</p>
+			<p>
+			● 容易焦慮<br>
+			● 自我意識強<br>
+			● 容易使他人感染情緒<br>
+			● 沒有抗壓性<br>
+			● 衝動<br>
+			</p>
+			<p>
+				如果你在此項人格特質中獲得高分的話，代表你很適合從事觀察環境變化的職業，例如：畫家、哲學家、管理員、秘書、攝影師。
+			</p>
+		</div>
+
+		<div class = 'window-text'>
+			<div class = 'text-head'>
+				<div class = 'text-head-round'>
+					<img src='static/asset/low.png'>
+				</div>
+				<h1>低分特點 Summary</h1>
+			</div>
+			<p></p>
+			<p>
+				在此項人格特質中獲得低分的人，通常抗壓性較高，在面對困難的時候會比獲得高分者更容易控制自己的情緒，但是有時候因為疏於對環境的敏銳度，可能會錯失一些良機或是得罪他人，因為這類型的人具有以下人格特質：
+			</p>
+			<p>
+			● 心情輕鬆<br>
+			● 很少煩惱<br>
+			● 沈著穩定<br>
+			● 少見情緒起伏<br>
+			● 難有同理心<br>
+			</p>
+			<p>
+				如果你在此項人格特質中獲得低分的話，代表你很適合從事不能隨情緒波動的工作，例如：醫生、老師、警察。
+			</p>
+		</div>
+
+	</div>
+	
+	
+
+	</div>
+
 	<div>
 		{{introductp}}
 	</div>
@@ -58,9 +410,50 @@
 	<div>
 		{{lowscoreIntro}}
 	</div>
+<script>
+	var t = '';
+	function display(t){
+		if(t == 'cons'){
+			document.getElementById('extend_ope').style.display = 'none';
+			document.getElementById('extend_agr').style.display = 'none';
+			document.getElementById('extend_extra').style.display = 'none';
+			document.getElementById('extend_neu').style.display = 'none';
+			document.getElementById('extend_cons').style.display = '';
+			
+		}
+		if(t == 'ope'){
+			document.getElementById('extend_cons').style.display = 'none';
+			document.getElementById('extend_agr').style.display = 'none';
+			document.getElementById('extend_extra').style.display = 'none';
+			document.getElementById('extend_neu').style.display = 'none';
+			document.getElementById('extend_ope').style.display = '';			
+		}
+		if(t == 'agr'){
+			document.getElementById('extend_cons').style.display = 'none';
+			document.getElementById('extend_ope').style.display = 'none';
+			document.getElementById('extend_extra').style.display = 'none';
+			document.getElementById('extend_neu').style.display = 'none';
+			document.getElementById('extend_agr').style.display = '';	
 
+		}
+		if(t == 'extra'){
+			document.getElementById('extend_cons').style.display = 'none';
+			document.getElementById('extend_ope').style.display = 'none';
+			document.getElementById('extend_agr').style.display = 'none';
+			document.getElementById('extend_neu').style.display = 'none';
+			document.getElementById('extend_extra').style.display = '';	
 
-
+		}
+		if(t == 'neu'){
+			document.getElementById('extend_cons').style.display = 'none';
+			document.getElementById('extend_ope').style.display = 'none';
+			document.getElementById('extend_agr').style.display = 'none';
+			document.getElementById('extend_extra').style.display = 'none';
+			document.getElementById('extend_neu').style.display = '';	
+		}
+}
+</script>
 
 </body>
 </html>
+

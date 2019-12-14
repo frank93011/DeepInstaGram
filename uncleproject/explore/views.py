@@ -44,10 +44,15 @@ def intro(request):
 			user_data = pickle.load(pic_file)
 			pic_file = open('user_personality', 'rb')
 			user_personality = pickle.load(pic_file)
+			pic_file = open('user_profile_pic', 'rb')
+			user_profile = pickle.load(pic_file)
+			pic_file = open('group_data', 'rb')
+			user_group = pickle.load(pic_file)
+			#print(user_personality)
 			#print(user_personality['prediction_prob']['openness'])
 			# data = json.dumps(data,ensure_ascii=False, sort_keys = False, indent = 4, separators=(',', ': '))
-			#for i in user_personality['prediction_prob']['openness'].keys():
-			for i in ['shizuku_jiang']:
+			for i in user_personality['prediction_prob']['openness'].keys():
+			#for i in ['shizuku_jiang']:
 				#print(user_personality['prediction_prob']['openness'][i])
 				ig_account = i
 				#print(ig_account)
@@ -81,6 +86,9 @@ def intro(request):
 				style_delicious = user_data['user_style_percent'][i]['佳餚美饌']
 				style_books = user_data['user_style_percent'][i]['典雅書香']
 
+				profile = []
+				profile.append(user_profile[ig_account])
+
 				User.objects.create(igName=ig_account, 
 					userEmail='hehe@email.com',
 					big5_openness = big5_openness,
@@ -113,9 +121,7 @@ def intro(request):
 				    style_delicious = style_delicious,
 				    style_books = style_books,
 
-				    imgUrl = ['img url']
-				    
-
+				    imgUrl = profile
 					)
 
 			return HttpResponseRedirect('/intro?page=1')
