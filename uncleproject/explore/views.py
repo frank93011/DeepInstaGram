@@ -86,8 +86,7 @@ def intro(request):
 				style_delicious = user_data['user_style_percent'][i]['佳餚美饌']
 				style_books = user_data['user_style_percent'][i]['典雅書香']
 
-				profile = []
-				profile.append(user_profile[ig_account])
+				profile = user_profile[ig_account]
 
 				User.objects.create(igName=ig_account, 
 					userEmail='hehe@email.com',
