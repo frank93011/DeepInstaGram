@@ -57,7 +57,7 @@ def intro(request):
 		# 	return HttpResponseRedirect('/intro?page=register')
 		# return HttpResponseRedirect('/intro?page=1')
 		#print(data)
-		#print(request.POST)
+		print(request.POST)
 		if "register_submit" in request.POST:
 			username = request.POST.get('username', '')
 			password = request.POST.get('password', '')
