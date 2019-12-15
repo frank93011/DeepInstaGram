@@ -1,5 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 import uuid
+from .managers import PersonManager
 #from django_mysql.models import ListCharField
 # Create your models here.
 

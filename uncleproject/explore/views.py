@@ -166,6 +166,7 @@ def intro(request):
 					)
 
 			return HttpResponseRedirect('/intro?page=1')
+
 	return render(request, 'intro.html', data)
 def Openness(request):
 	s = request.GET['sub']
