@@ -1,2 +1,3 @@
-__pycache__/
+uncleproject/explore/__pycache__/
+uncleproject/uncleproject/__pycache__/
 *.DS_Store
