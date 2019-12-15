@@ -1,4 +1,5 @@
 uncleproject/explore/__pycache__/
 uncleproject/uncleproject/__pycache__/
 uncleproject/__pycache__/
+uncleproject/db.sqlite3
 *.DS_Store
