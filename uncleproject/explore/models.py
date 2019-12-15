@@ -1,9 +1,15 @@
 from django.db import models
+from django.contrib.auth.models import User
 import uuid
+from .managers import PersonManager
 #from django_mysql.models import ListCharField
 # Create your models here.
 
-class User(models.Model):
+class User(User):
+    objects = PersonManager()
+    class Meta:
+        proxy = True
+        ordering = ('first_name', )
     userID = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this user.")
     igName = models.CharField(
         help_text="the user's IG account :",
