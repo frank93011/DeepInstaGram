@@ -5,6 +5,7 @@ from django.contrib import auth
 from .models import User, Group, GroupRelation
 import pickle
 import json
+import pandas as pd
 import matplotlib.pyplot as plt; plt.rcdefaults()
 import numpy as np
 import matplotlib.pyplot as plt
@@ -48,6 +49,14 @@ def intro(request):
 			user_profile = pickle.load(pic_file)
 			pic_file = open('group_data', 'rb')
 			user_group = pickle.load(pic_file)
+			sheet = pd.read_excel("ig_info.xlsx")
+			curr_num = len(sheet)
+			email_list = list(sheet['電子郵件地址'])
+			ig_list = list(sheet['IG帳號'])
+			userEmail = ''
+			#print(ig_list)
+
+			# print(sheet['電子郵件地址'])
 			#print(user_personality)
 			#print(user_personality['prediction_prob']['openness'])
 			# data = json.dumps(data,ensure_ascii=False, sort_keys = False, indent = 4, separators=(',', ': '))
@@ -55,7 +64,11 @@ def intro(request):
 			#for i in ['shizuku_jiang']:
 				#print(user_personality['prediction_prob']['openness'][i])
 				ig_account = i
-				#print(ig_account)
+				# print(ig_account)
+				if i in ig_list:
+					usr_idx = ig_list.index(i)
+					userEmail = email_list[usr_idx]
+					# print(userEmail)
 				big5_openness = user_personality['prediction_prob']['openness'][i]
 				big5_conscientiousness = user_personality['prediction_prob']['conscientiousness'][i]
 				big5_extraversion = user_personality['prediction_prob']['extraversion'][i]
@@ -89,7 +102,7 @@ def intro(request):
 				profile = user_profile[ig_account]
 
 				User.objects.create(igName=ig_account, 
-					userEmail='hehe@email.com',
+					userEmail=userEmail,
 					big5_openness = big5_openness,
 				    big5_conscientiousness = big5_conscientiousness,
 				    big5_extraversion = big5_extraversion,

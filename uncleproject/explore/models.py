@@ -3,7 +3,7 @@ import uuid
 #from django_mysql.models import ListCharField
 # Create your models here.
 
-class User(models.Model):
+class User(AbstractUser):
     userID = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this user.")
     igName = models.CharField(
         help_text="the user's IG account :",
