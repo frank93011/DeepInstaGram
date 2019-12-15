@@ -73,4 +73,11 @@ body{
 	color: #ffffff;
 }
 
+#introduction{
+	width:1000px;
+	height: 2000px;
+	background-color: white;
+	border-radius: 68px;
+}
+
 
