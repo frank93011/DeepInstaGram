@@ -3,12 +3,11 @@ from django.contrib.auth.models import User
 import uuid
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-# from .managers import PersonManager
+
 #from django_mysql.models import ListCharField
 # Create your models here.
 
 class User(models.Model):
-    # objects = PersonManager()
     userID = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this user.")
     igName = models.CharField(
         help_text="the user's IG account :",

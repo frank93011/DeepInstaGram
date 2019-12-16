@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="static/realize.css">
+</head>
+<body>
+<div class="login-container">
+    <h1 class="title-1" style="margin: 20px;">註冊</h1>
+    <form action="" method="post">
+      {% csrf_token %}
+            <label for="username" class="title-2">帳戶 User Name / IG account:</label>
+            <input class="account_input" type="text" name="username" value="" id="username" style="width: 400px;height: 40px;opacity: 0.67;box-shadow: 0 3px 2px 0 rgba(0, 0, 0, 0.04);"> <br />
+            <label for="password" class="title-2">密碼 Password / E-mail:</label>
+            <input class="account_input" type="password" name="password" value="" id="password"> <br />
+            <!-- <input type="submit" style="width:200px;height:60px;background-repeat: no-repeat;background-size: 100px;background-image:url(static/asset/signIn.png);" /> -->
+             <input name="register_submit" type="submit" class="sign_in_button" style="background-color: #4fc793;" value="register" />
+            
+        </form>
+       
+    <!-- <a href="/realized "><img src="static/asset/signIn.png" style="cursor: pointer;"></a> -->
+    </div>
+</body>
+</html>
+{% endblock %}

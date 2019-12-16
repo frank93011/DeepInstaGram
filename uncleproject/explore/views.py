@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from .models import User, Group, GroupRelation
+from django.contrib.auth.models import User
 import pickle
 import json
 import pandas as pd
@@ -20,6 +21,15 @@ ne = {'1': 'N_introduction', '2': 'N_highscore','3': 'N_lowscore'}
 
 def homepage(request):
 	return render(request, 'homepage.html')
+
+def register(request):
+	
+	username = request.POST.get('username', '')
+	password = request.POST.get('password', '')
+	if (username != '' and password != ''):
+		User.objects.create_user(username=username, password=password)
+		return HttpResponseRedirect('/intro?page=register')
+	return HttpResponseRedirect('/intro?page=1')
 
 def intro(request):
 	p = request.GET['page']
@@ -39,6 +49,25 @@ def intro(request):
 			#return HttpResponseRedirect('/realized')
 			return render(request, 'realized.html', data)
 
+	if p == 'register':
+		# username = request.POST.get('username', '')
+		# password = request.POST.get('password', '')
+		# if (username != '' and password != ''):
+		# 	User.objects.create_user(username=username, password=password)
+		# 	return HttpResponseRedirect('/intro?page=register')
+		# return HttpResponseRedirect('/intro?page=1')
+		#print(data)
+		print(request.POST)
+		if "register_submit" in request.POST:
+			username = request.POST.get('username', '')
+			password = request.POST.get('password', '')
+			if (username != '' and password != ''):
+				User.objects.create_user(username=username, password=password)
+				return HttpResponseRedirect('/intro?page=register')
+			return HttpResponseRedirect('/intro?page=1')
+		#print('inside')
+		return render(request, 'register.html', data)
+		#return HttpResponseRedirect('/register')
 	if p == 'import':
 		if request.user.is_superuser == True:
 			pic_file = open('user_data_new', 'rb')
@@ -138,9 +167,6 @@ def intro(request):
 					)
 
 			return HttpResponseRedirect('/intro?page=1')
-		# else:
-		# 	# return render_to_response('3.html')
-		# 	return HttpResponseRedirect('/intro?page=3')
 
 	return render(request, 'intro.html', data)
 def Openness(request):
@@ -203,3 +229,4 @@ def logout(request):
     auth.logout(request)
     #return HttpResponseRedirect('/intro/')
     return HttpResponseRedirect('/intro?page=1')
+

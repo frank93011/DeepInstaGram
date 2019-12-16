@@ -30,6 +30,7 @@ urlpatterns = [
     path('Neuroticism', Neuroticism),
     path('realized', realized),
     path('logout', logout),
+    path('register', register),
     url(r'^accounts/logout/$',logout)
 
 
