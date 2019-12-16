@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
-#from .managers import PersonManager
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 #from django_mysql.models import ListCharField
 # Create your models here.
 
@@ -50,7 +52,6 @@ class User(models.Model):
         help_text="the profile url:",
         max_length=200,
     )
-
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
         return self.igName

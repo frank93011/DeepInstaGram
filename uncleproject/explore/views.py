@@ -130,7 +130,8 @@ def intro(request):
 
 				profile = user_profile[ig_account]
 
-				User.objects.create(igName=ig_account, 
+				User.objects.create(
+					igName=ig_account, 
 					userEmail=userEmail,
 					big5_openness = big5_openness,
 				    big5_conscientiousness = big5_conscientiousness,
@@ -194,7 +195,10 @@ def test(request):
 	data = {'gg': "intro.html"}
 	return render(request, 'test.html', data)
 def realized(request):
-	data = {'gg': "intro.html"}
+	df = pd.read_excel("insta_info.xlsx")
+	uid = User.objects.get(igName="linweiiihsuan")
+	o, c, e, a, n = cal_score(df.loc[df['IG帳號'] == uid.igName])
+	data = {'gg': "intro.html", "uid": uid, "o": o, "c":c, "e":e, "a":a, "n":n}
 	return render(request, 'realized.html', data)
 	#return render(request, 'realized.html', data)
 	if request.user.is_authenticated == True: 
@@ -213,6 +217,14 @@ def realized(request):
 	else:
 		# return render_to_response('3.html')
 		return HttpResponseRedirect('/intro?page=3')
+def cal_score(row):
+	elem = row.iloc[0]
+	openness = int(elem[36]) + int(elem[11]) + int(elem[20]) + int(elem[26]) - int(elem[6]) - int(elem[16]) - int(elem[31]) - 3
+	conscientiousness = int(elem[38]) + int(elem[8]) + int(elem[13]) + int(elem[18]) + int(elem[28]) - int(elem[23]) - int(elem[33]) - 9
+	extraversion = int(elem[15]) + int(elem[5]) + int(elem[10]) + int(elem[35]) + int(elem[30]) - int(elem[21]) - int(elem[25]) - 9
+	agreeableness = int(elem[37]) + int(elem[32]) - int(elem[7]) - int(elem[12]) - int(elem[17]) - int(elem[22]) - int(elem[27]) + 9 
+	neuroticism = int(elem[14]) + int(elem[19]) + int(elem[29]) - int(elem[4]) - int(elem[9]) - int(elem[24]) - int(elem[34]) + 3
+	return openness/14, conscientiousness/14, extraversion/14, agreeableness/14, neuroticism/14
 def logout(request):
     auth.logout(request)
     #return HttpResponseRedirect('/intro/')

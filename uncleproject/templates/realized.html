@@ -1,16 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.src.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
 <link href="{% static 'realize.css' %}" rel="stylesheet">
 <div class="block_container">
     <div class="minor_nav">
-        <button class="select_nav"><h5>分析總覽</h5></button>
-        <button class="select_nav"><h5 >問卷結果</h5></button>
+        <button class="select_nav" onclick="change_display(['貼文意境 Style','container','貼文人格分析 Personality','container_1'])"><h5>分析總覽</h5></button>
+        <button class="select_nav" onclick="change_display(['問卷結果','container_2'])"><h5 >問卷結果</h5></button>
         <button class="select_nav"><h5 >群體分析</h5></button>
     </div>
-    <div style="display: flex;">
-        <img class="profile_pic" src="static/asset/ope.png">
+    <div style="display: flex; margin-top: 20px">
+        <img class="profile_pic" src="static/asset/test_profile.JPG">
         <div style="width: 80%;">
             <h1 class="name">{{request.user}}</h1>
             <div style="display: flex;">
@@ -25,8 +30,8 @@
             </div>
         </div>
     </div>
-    <div style="align-items: center;">
-        <div style="margin: 15px;">
+    <div id="panel_container" style="align-items: center;">
+        <div style="margin-top: 50px;">
             <div class="sub_title">
                 <h5>貼文意境 Style</h5>
             </div>
@@ -42,49 +47,90 @@
                 <div id="container_1"></div>
             </div>
         </div>
-        <div style="margin: 15px;">
-            <div class="sub_title">
-                <h5>貼文興趣分析 Hobbies</h5>
-            </div>
-            <div class="display_container">
-            </div>
-        </div>
-
-
     </div>
 </div>
 <script>
-    Highcharts.chart('container', {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: ''
-        },
-        xAxis: {
-            categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania']
-        },
-        series: [{
-            name: 'Year 1800',
-            data: [107, 31, 635, 203, 2]
-        }, {
-            name: 'Year 1900',
-            data: [133, 156, 947, 408, 6]
-        }, {
-            name: 'Year 2012',
-            data: [1052, 954, 4250, 740, 38]
-        }]
-    });
+$( window ).load(create_chart());
+function change_display(contain_list){
+  var e = $("#panel_container").empty();
+  for(var l = 0; l < contain_list.length; l++){
+    var title = contain_list[l];
+    l = l + 1
+    var container_name = contain_list[l];
+    e.append("<div style='margin-top: 50px;'><div class='sub_title'><h5>" + title + "</h5></div></div><div class='display_container'><div id='" + container_name + "'></div></div>")
+  }
+  create_chart()
+};
+function create_chart(){
+  Highcharts.chart('container', {
+  chart: {
+      polar: true,
+      type: 'line'
+  },
+
+  title: {
+      text: 'Instagram 五大人格傾向分析'
+  },
+
+  pane: {
+      size: '80%'
+  },
+
+  xAxis: {
+      categories: ['Openness', 'Conscientiousness','Extraversion','Agreeableness','Neuroticism'],
+      tickmarkPlacement: 'on',
+      lineWidth: 0
+  },
+
+  yAxis: {
+      gridLineInterpolation: 'polygon',
+      lineWidth: 0,
+      min: 0
+  },
+
+  tooltip: {
+      shared: true,
+      pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y}</b><br/>'
+  },
+
+  legend: {
+      align: 'right',
+      verticalAlign: 'middle'
+  },
+
+  series: [{
+      name: 'big 5 prdiction',
+      data: [ parseFloat("{{uid.big5_openness}}"), parseFloat("{{uid.big5_conscientiousness}}"), parseFloat("{{uid.big5_extraversion}}"), parseFloat("{{uid.big5_agreeableness}}"), parseFloat("{{uid.big5_neuroticism}}")],
+      pointPlacement: 'on'
+  }],
+
+  responsive: {
+      rules: [{
+          condition: {
+              maxWidth: 1
+          },
+          chartOptions: {
+              legend: {
+                  align: 'center',
+                  verticalAlign: 'bottom'
+              },
+              pane: {
+                  size: '70%'
+              }
+          }
+      }]
+  }
+});
     // Create the chart
 Highcharts.chart('container_1', {
   chart: {
     type: 'pie'
   },
   title: {
-    text: 'Browser market shares. January, 2018'
+    text: 'Instagram 圖片風格分析',
   },
   subtitle: {
-    text: 'Click the slices to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+    text:'',
   },
   plotOptions: {
     series: {
@@ -106,40 +152,70 @@ Highcharts.chart('container_1', {
       colorByPoint: true,
       data: [
         {
-          name: "Chrome",
-          y: 62.74,
-          drilldown: "Chrome"
+          name: "hiking",
+          y: Number("{{uid.style_hiking}}"),
+          drilldown: "hiking"
         },
         {
-          name: "Firefox",
-          y: 10.57,
-          drilldown: "Firefox"
+          name: "infant",
+          y: Number("{{uid.style_infant}}"),
+          drilldown: "infant"
         },
         {
-          name: "Internet Explorer",
-          y: 7.23,
-          drilldown: "Internet Explorer"
+          name: "studying",
+          y: Number("{{uid.style_studying}}"),
+          drilldown: "studying"
         },
         {
-          name: "Safari",
-          y: 5.58,
-          drilldown: "Safari"
+          name: "celebrate",
+          y: Number("{{uid.style_celebrate}}"),
+          drilldown: "celebrate"
         },
         {
-          name: "Edge",
-          y: 4.02,
-          drilldown: "Edge"
+          name: "firework",
+          y: Number("{{uid.style_firework}}"),
+          drilldown: "firework"
         },
         {
-          name: "Opera",
-          y: 1.92,
-          drilldown: "Opera"
+          name: "nightclub",
+          y: Number("{{uid.style_nightclub}}"),
+          drilldown: "nightclub"
         },
         {
-          name: "Other",
-          y: 7.62,
-          drilldown: null
-        }
+          name: "sports",
+          y: Number("{{uid.style_sports}}"),
+          drilldown: "sports"
+        },
+        {
+          name: "depressed",
+          y: Number("{{uid.style_depressed}}"),
+          drilldown: "depressed"
+        },
+        {
+          name: "lonely",
+          y: Number("{{uid.style_lonely}}"),
+          drilldown: "lonely"
+        },
+        {
+          name: "selfie",
+          y: Number("{{uid.style_selfie}}"),
+          drilldown: "selfie"
+        },
+        {
+          name: "building",
+          y: Number("{{uid.style_building}}"),
+          drilldown: "building"
+        },
+        {
+          name: "delicious",
+          y: Number("{{uid.style_delicious}}"),
+          drilldown: "delicious"
+        },
+        {
+          name: "books",
+          y: Number("{{uid.style_books}}"),
+          drilldown: "books"
+        },
       ]
     }
   ],
@@ -223,146 +299,10 @@ Highcharts.chart('container_1', {
           ]
         ]
       },
-      {
-        name: "Firefox",
-        id: "Firefox",
-        data: [
-          [
-            "v58.0",
-            1.02
-          ],
-          [
-            "v57.0",
-            7.36
-          ],
-          [
-            "v56.0",
-            0.35
-          ],
-          [
-            "v55.0",
-            0.11
-          ],
-          [
-            "v54.0",
-            0.1
-          ],
-          [
-            "v52.0",
-            0.95
-          ],
-          [
-            "v51.0",
-            0.15
-          ],
-          [
-            "v50.0",
-            0.1
-          ],
-          [
-            "v48.0",
-            0.31
-          ],
-          [
-            "v47.0",
-            0.12
-          ]
-        ]
-      },
-      {
-        name: "Internet Explorer",
-        id: "Internet Explorer",
-        data: [
-          [
-            "v11.0",
-            6.2
-          ],
-          [
-            "v10.0",
-            0.29
-          ],
-          [
-            "v9.0",
-            0.27
-          ],
-          [
-            "v8.0",
-            0.47
-          ]
-        ]
-      },
-      {
-        name: "Safari",
-        id: "Safari",
-        data: [
-          [
-            "v11.0",
-            3.39
-          ],
-          [
-            "v10.1",
-            0.96
-          ],
-          [
-            "v10.0",
-            0.36
-          ],
-          [
-            "v9.1",
-            0.54
-          ],
-          [
-            "v9.0",
-            0.13
-          ],
-          [
-            "v5.1",
-            0.2
-          ]
-        ]
-      },
-      {
-        name: "Edge",
-        id: "Edge",
-        data: [
-          [
-            "v16",
-            2.6
-          ],
-          [
-            "v15",
-            0.92
-          ],
-          [
-            "v14",
-            0.4
-          ],
-          [
-            "v13",
-            0.1
-          ]
-        ]
-      },
-      {
-        name: "Opera",
-        id: "Opera",
-        data: [
-          [
-            "v50.0",
-            0.96
-          ],
-          [
-            "v49.0",
-            0.82
-          ],
-          [
-            "v12.1",
-            0.14
-          ]
-        ]
-      }
     ]
   }
 });
+
+}
 </script>
 {% endblock %}
