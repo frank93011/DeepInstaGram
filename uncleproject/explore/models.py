@@ -1,15 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
-from .managers import PersonManager
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+# from .managers import PersonManager
 #from django_mysql.models import ListCharField
 # Create your models here.
 
-class User(User):
-    objects = PersonManager()
-    class Meta:
-        proxy = True
-        ordering = ('first_name', )
+class User(models.Model):
+    # objects = PersonManager()
     userID = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this user.")
     igName = models.CharField(
         help_text="the user's IG account :",
@@ -54,7 +53,6 @@ class User(User):
         help_text="the profile url:",
         max_length=200,
     )
-
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
         return self.igName
