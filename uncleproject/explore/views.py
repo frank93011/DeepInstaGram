@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.contrib import auth
-from .models import User, Group, GroupRelation
+from .models import myUser, Group, GroupRelation
 from django.contrib.auth.models import User
 import pickle
 import json
@@ -70,6 +70,7 @@ def intro(request):
 		#return HttpResponseRedirect('/register')
 	if p == 'import':
 		if request.user.is_superuser == True:
+
 			pic_file = open('user_data_new', 'rb')
 			user_data = pickle.load(pic_file)
 			pic_file = open('user_personality', 'rb')
@@ -78,17 +79,111 @@ def intro(request):
 			user_profile = pickle.load(pic_file)
 			pic_file = open('group_data', 'rb')
 			user_group = pickle.load(pic_file)
+			pic_file = open('group_predictionmac', 'rb')
+			mac_group = pickle.load(pic_file)
 			sheet = pd.read_excel("ig_info.xlsx")
 			curr_num = len(sheet)
+			
 			email_list = list(sheet['電子郵件地址'])
 			ig_list = list(sheet['IG帳號'])
 			userEmail = ''
-			#print(ig_list)
+			
+			big5_openness = mac_group['group_personality']['openness']
+			big5_conscientiousness = mac_group['group_personality']['conscientiousness']
+			big5_extraversion = mac_group['group_personality']['extraversion']
+			big5_agreeableness = mac_group['group_personality']['agreeableness']
+			big5_neuroticism = mac_group['group_personality']['neuroticism']
 
-			# print(sheet['電子郵件地址'])
-			#print(user_personality)
-			#print(user_personality['prediction_prob']['openness'])
-			# data = json.dumps(data,ensure_ascii=False, sort_keys = False, indent = 4, separators=(',', ': '))
+			hobby_outdoor = mac_group['group_hobby']['outdoor']
+			hobby_water = mac_group['group_hobby']['water']
+			hobby_sport = mac_group['group_hobby']['sport']
+			hobby_music = mac_group['group_hobby']['music']
+			hobby_dance = mac_group['group_hobby']['dance']
+			hobby_photo = mac_group['group_hobby']['photo']
+			hobby_drama = mac_group['group_hobby']['drama']
+			hobby_game = mac_group['group_hobby']['game']
+			hobby_visual = mac_group['group_hobby']['visual']
+
+			style_hiking = mac_group['group_style']['hiking']
+			style_infant = mac_group['group_style']['infants']
+			style_studying = mac_group['group_style']['reading books']
+			style_celebrate = mac_group['group_style']['celebrate']
+			style_firework = mac_group['group_style']['firework']
+			style_nightclub = mac_group['group_style']['night club']
+			style_sports = mac_group['group_style']['sport']
+			style_depressed = mac_group['group_style']['depress']
+			style_lonely = mac_group['group_style']['loneliness']
+			style_selfie = mac_group['group_style']['selfie']
+			style_building = mac_group['group_style']['building']
+			style_delicious = mac_group['group_style']['delicious']
+			style_books = mac_group['group_style']['books']
+
+			liked_hiking = 999
+			liked_infant = 999
+			liked_studying = 999
+			liked_celebrate = 999
+			liked_firework = 999
+			liked_nightclub = 999
+			liked_sports = 999
+			liked_depressed = 999
+			liked_lonely = 999
+			liked_selfie = 999
+			liked_building = 999
+			liked_delicious = 999
+			liked_books = 999
+
+			total_user = mac_group['total_user']
+
+			Group.objects.create(
+				groupName='mac', 
+				total_user = total_user,
+				big5_openness = big5_openness,
+				big5_conscientiousness = big5_conscientiousness,
+				big5_extraversion = big5_extraversion,
+				big5_agreeableness = big5_agreeableness,
+				big5_neuroticism = big5_neuroticism,
+
+				hobby_outdoor = hobby_outdoor,
+				hobby_water = hobby_water,
+				hobby_sport = hobby_sport,
+				hobby_music = hobby_music,
+				hobby_dance = hobby_dance,
+				hobby_photo = hobby_photo,
+				hobby_drama = hobby_drama,
+				hobby_game = hobby_game,
+				hobby_visual = hobby_visual,
+
+				style_hiking = style_hiking,
+				style_infant = style_infant,
+				style_studying = style_studying,
+				style_celebrate = style_celebrate,
+				style_firework = style_firework,
+				style_nightclub = style_nightclub,
+				style_sports = style_sports,
+				style_depressed = style_depressed,
+				style_lonely = style_lonely,
+				style_selfie = style_selfie,
+				style_building = style_building,
+				style_delicious = style_delicious,
+				style_books = style_books,
+
+				liked_hiking = liked_hiking,
+				liked_infant = liked_infant,
+				liked_studying = liked_studying,
+				liked_celebrate = liked_celebrate,
+				liked_firework = liked_firework,
+				liked_nightclub = liked_nightclub,
+				liked_sports = liked_sports,
+				liked_depressed = liked_depressed,
+				liked_lonely = liked_lonely,
+				liked_selfie = liked_selfie,
+				liked_building = liked_building,
+				liked_delicious = liked_delicious,
+				liked_books = liked_books,
+
+			)
+
+
 			for i in user_personality['prediction_prob']['openness'].keys():
 			#for i in ['shizuku_jiang']:
 				#print(user_personality['prediction_prob']['openness'][i])
@@ -130,7 +225,7 @@ def intro(request):
 
 				profile = user_profile[ig_account]
 
-				User.objects.create(
+				myUser.objects.create(
 					igName=ig_account, 
 					userEmail=userEmail,
 					big5_openness = big5_openness,
@@ -196,7 +291,7 @@ def test(request):
 	return render(request, 'test.html', data)
 def realized(request):
 	df = pd.read_excel("insta_info.xlsx")
-	uid = User.objects.get(igName="linweiiihsuan")
+	uid = myUser.objects.get(igName="linweiiihsuan")
 	o, c, e, a, n = cal_score(df.loc[df['IG帳號'] == uid.igName])
 	data = {'gg': "intro.html", "uid": uid, "o": o, "c":c, "e":e, "a":a, "n":n}
 	return render(request, 'realized.html', data)
