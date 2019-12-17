@@ -292,8 +292,9 @@ def test(request):
 def realized(request):
 	df = pd.read_excel("insta_info.xlsx")
 	uid = myUser.objects.get(igName="linweiiihsuan")
+	group = Group.objects.get(groupName="mac")
 	o, c, e, a, n = cal_score(df.loc[df['IG帳號'] == uid.igName])
-	data = {'gg': "intro.html", "uid": uid, "o": o, "c":c, "e":e, "a":a, "n":n}
+	data = {'gg': "intro.html", "uid": uid, "o": o, "c":c, "e":e, "a":a, "n":n, 'group': group}
 	return render(request, 'realized.html', data)
 	#return render(request, 'realized.html', data)
 	if request.user.is_authenticated == True: 
