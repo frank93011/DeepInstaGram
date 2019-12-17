@@ -67,6 +67,8 @@
 	background:#9d51db; 
 	border-radius:80px;
 	padding-top:120px;
+	box-shadow: 2px 3px 5px 0 
+	rgba(0, 0, 0, 0.16);
 }
 #extend_ope{
 	margin:auto;
@@ -76,6 +78,8 @@
 	background:#1caa59; 
 	border-radius:80px;
 	padding-top:120px;
+	box-shadow: 2px 3px 5px 0 
+	rgba(0, 0, 0, 0.16);
 }
 #extend_agr{
 	margin:auto;
@@ -85,6 +89,7 @@
 	background:#3345c4; 
 	border-radius:80px;
 	padding-top:120px;
+	box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.16);
 }
 #extend_extra{
 	margin:auto;
@@ -94,6 +99,7 @@
 	background:#be4040; 
 	border-radius:80px;
 	padding-top:120px;
+	box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.16);
 }
 #extend_neu{
 	margin:auto;
@@ -103,6 +109,7 @@
 	background:#6974ff; 
 	border-radius:80px;
 	padding-top:120px;
+	box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.16);
 }
 
 
@@ -129,6 +136,7 @@
 	background-color: white;
 	padding-top:20px;
 	margin-bottom:30px;
+	box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.16);
 }
 
 .window-head{
@@ -151,6 +159,7 @@
 	margin:auto;
 	padding-left:10px;
 	padding-top:5px;
+	box-shadow: 2px 3px 5px 0 rgba(0, 0, 0, 0.16);
 }
 
 .text-head-round{
