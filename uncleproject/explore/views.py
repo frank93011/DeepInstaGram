@@ -47,6 +47,7 @@ def intro(request):
 		if user is not None and user.is_active:
 			auth.login(request, user)
 			#return HttpResponseRedirect('/realized')
+			#realized(request)
 			return render(request, 'realized.html', data)
 
 	if p == 'register':
@@ -91,11 +92,15 @@ def intro(request):
 			group_harley = pickle.load(pic_file)
 			pic_file = open('data/group_prediction_mac', 'rb')
 			group_mac = pickle.load(pic_file)
+			pic_file = open('data/group_prediction_enphants', 'rb')
+			group_enph = pickle.load(pic_file)
+			pic_file = open('data/individual_prediction_enphants', 'rb')
+			user_enph = pickle.load(pic_file)
 
 
 
-			usr_list = [user_lab, user_harley, user_mac]
-			group_list = [group_harley, group_mac]
+			usr_list = []
+			group_list = []
 
 			sheet = pd.read_excel("ig_info.xlsx")
 
@@ -105,7 +110,20 @@ def intro(request):
 
 
 			for j in group_list:
-				
+			#=================================
+				category = ['hiking', 'infants', 'reading books', 'celebrate', 'firework', 'night club', 'sport', 'depress', 'loneliness', 'selfie', 'building', 'delicious', 'books']
+				for c in category:
+					if c not in j['group_style'].keys():
+						j['group_style'][c] = 0
+
+				for c in category:
+					if c not in j['official_style_like'].keys():
+						j['official_style_like'][c] = 0
+
+				for c in category:
+					if c not in j['official_style_percent'].keys():
+						j['official_style_percent'][c] = 0
+            #==================================
 				groupName = j['group_name']
 
 				total_user = j['total_user']
@@ -140,6 +158,8 @@ def intro(request):
 				style_delicious = j['group_style']['delicious']
 				style_books = j['group_style']['books']
 
+
+				#print(j['official_style_percent'])
 				official_hiking_percent = j['official_style_percent']['hiking']
 				official_infant_percent = j['official_style_percent']['infants']
 				official_studying_percent = j['official_style_percent']['reading books']
@@ -154,19 +174,21 @@ def intro(request):
 				official_delicious_percent = j['official_style_percent']['delicious']
 				official_books_percent = j['official_style_percent']['books']
 
-				liked_hiking = j['official_style_like']['hiking']
-				liked_infant = j['official_style_like']['infants']
-				liked_studying = j['official_style_like']['reading books']
-				liked_celebrate = j['official_style_like']['celebrate']
-				liked_firework = j['official_style_like']['firework']
-				liked_nightclub = j['official_style_like']['night club']
-				liked_sports = j['official_style_like']['sport']
-				liked_depressed = j['official_style_like']['depress']
-				liked_lonely = j['official_style_like']['loneliness']
-				liked_selfie = j['official_style_like']['selfie']
-				liked_building = j['official_style_like']['building']
-				liked_delicious = j['official_style_like']['delicious']
-				liked_books = j['official_style_like']['books']
+
+
+				liked_hiking = round(j['official_style_like']['hiking'])
+				liked_infant = round(j['official_style_like']['infants'])
+				liked_studying = round(j['official_style_like']['reading books'])
+				liked_celebrate = round(j['official_style_like']['celebrate'])
+				liked_firework = round(j['official_style_like']['firework'])
+				liked_nightclub = round(j['official_style_like']['night club'])
+				liked_sports = round(j['official_style_like']['sport'])
+				liked_depressed = round(j['official_style_like']['depress'])
+				liked_lonely = round(j['official_style_like']['loneliness'])
+				liked_selfie = round(j['official_style_like']['selfie'])
+				liked_building = round(j['official_style_like']['building'])
+				liked_delicious = round(j['official_style_like']['delicious'])
+				liked_books = round(j['official_style_like']['books'])
 
 				total_user = mac_group['total_user']
 
@@ -237,84 +259,8 @@ def intro(request):
 
 				)
 
-
-			# for i in user_personality['prediction_prob']['openness'].keys():
-			# #for i in ['shizuku_jiang']:
-			# 	#print(user_personality['prediction_prob']['openness'][i])
-			# 	ig_account = i
-			# 	# print(ig_account)
-			# 	if i in ig_list:
-			# 		usr_idx = ig_list.index(i)
-			# 		userEmail = email_list[usr_idx]
-			# 		# print(userEmail)
-			# 	big5_openness = user_personality['prediction_prob']['openness'][i]
-			# 	big5_conscientiousness = user_personality['prediction_prob']['conscientiousness'][i]
-			# 	big5_extraversion = user_personality['prediction_prob']['extraversion'][i]
-			# 	big5_agreeableness = user_personality['prediction_prob']['agreeableness'][i]
-			# 	big5_neuroticism = user_personality['prediction_prob']['neuroticism'][i]
-
-			# 	hobby_outdoor = 999
-			# 	hobby_water = 999
-			# 	hobby_sport = 999
-			# 	hobby_music = 999
-			# 	hobby_dance = 999
-			# 	hobby_photo = 999
-			# 	hobby_drama = 999
-			# 	hobby_game = 999
-			# 	hobby_visual = 999
-
-			# 	style_hiking = user_data['user_style_percent'][i]['自然樂活']
-			# 	style_infant = user_data['user_style_percent'][i]['生氣蓬勃']
-			# 	style_studying = user_data['user_style_percent'][i]['勤勉向上']
-			# 	style_celebrate = user_data['user_style_percent'][i]['慶典狂歡']
-			# 	style_firework = user_data['user_style_percent'][i]['斑斕繽紛']
-			# 	style_nightclub = user_data['user_style_percent'][i]['不夜喧囂']
-			# 	style_sports = user_data['user_style_percent'][i]['運動']
-			# 	style_depressed = user_data['user_style_percent'][i]['壓抑之心']
-			# 	style_lonely = user_data['user_style_percent'][i]['無聲孤寂']
-			# 	style_selfie = user_data['user_style_percent'][i]['自拍狂熱']
-			# 	style_building = user_data['user_style_percent'][i]['建築之美']
-			# 	style_delicious = user_data['user_style_percent'][i]['佳餚美饌']
-			# 	style_books = user_data['user_style_percent'][i]['典雅書香']
-
-			# 	profile = user_profile[ig_account]
-
-			# 	myUser.objects.create(
-			# 		igName=ig_account, 
-			# 		userEmail=userEmail,
-			# 		big5_openness = big5_openness,
-			# 	    big5_conscientiousness = big5_conscientiousness,
-			# 	    big5_extraversion = big5_extraversion,
-			# 	    big5_agreeableness = big5_agreeableness,
-			# 	    big5_neuroticism = big5_neuroticism,
-
-			# 	    hobby_outdoor = hobby_outdoor,
-			# 	    hobby_water = hobby_water,
-			# 	    hobby_sport = hobby_sport,
-			# 	    hobby_music = hobby_music,
-			# 	    hobby_dance = hobby_dance,
-			# 	    hobby_photo = hobby_photo,
-			# 	    hobby_drama = hobby_drama,
-			# 	    hobby_game = hobby_game,
-			# 	    hobby_visual = hobby_visual,
-
-			# 	    style_hiking = style_hiking,
-			# 	    style_infant = style_infant,
-			# 	    style_studying = style_studying,
-			# 	    style_celebrate = style_celebrate,
-			# 	    style_firework = style_firework,
-			# 	    style_nightclub = style_nightclub,
-			# 	    style_sports = style_sports,
-			# 	    style_depressed = style_depressed,
-			# 	    style_lonely = style_lonely,
-			# 	    style_selfie = style_selfie,
-			# 	    style_building = style_building,
-			# 	    style_delicious = style_delicious,
-			# 	    style_books = style_books,
-
-			# 	    imgUrl = profile
-			# 		)
 			err_cnt = 0
+
 			for j in usr_list:
 			#=================================
 				category = ['hiking', 'infants', 'reading books', 'celebrate', 'firework', 'night club', 'sport', 'depress', 'loneliness', 'selfie', 'building', 'delicious', 'books']
@@ -375,21 +321,25 @@ def intro(request):
 
 						#print(j['user_total_like'])
 
-						hiking_like_percent = j['user_total_like'][i]
-						infant_like_percent = j['user_total_like'][i]
-						studying_like_percent = j['user_total_like'][i]
-						celebrate_like_percent = j['user_total_like'][i]
-						firework_like_percent = j['user_total_like'][i]
-						nightclub_like_percent = j['user_total_like'][i]
-						sports_like_percent = j['user_total_like'][i]
-						depressed_like_percent = j['user_total_like'][i]
-						lonely_like_percent = j['user_total_like'][i]
-						selfie_like_percent = j['user_total_like'][i]
-						building_like_percent = j['user_total_like'][i]
-						delicious_like_percent = j['user_total_like'][i]
-						books_like_percent = j['user_total_like'][i]
+
+						# hiking_like_percent = j['user_total_like'][i]['hiking']
+						# infant_like_percent = j['user_total_like'][i]['infants']
+						# studying_like_percent = j['user_total_like'][i]['reading books']
+						# celebrate_like_percent = j['user_total_like'][i]['celebrate']
+						# firework_like_percent = j['user_total_like'][i]['firework']
+						# nightclub_like_percent = j['user_total_like'][i]['night club']
+						# sports_like_percent = j['user_total_like'][i]['sport']
+						# depressed_like_percent = j['user_total_like'][i]['depress']
+						# lonely_like_percent = j['user_total_like'][i]['loneliness']
+						# selfie_like_percent = j['user_total_like'][i]['selfie']
+						# building_like_percent = j['user_total_like'][i]['building']
+						# delicious_like_percent = j['user_total_like'][i]['delicious']
+						# books_like_percent = j['user_total_like'][i]['books']	
+						user_total_like = round(j['user_total_like'][i])
+
 
 						#print(j['user_profile_pic'])
+						print('wryyyyyyyyyyyyy')
 						profile = j['user_profile_pic'][i]
 
 					
@@ -435,26 +385,27 @@ def intro(request):
 							style_delicious_like = style_delicious_like,
 							style_books_like = style_books_like,
 
-							hiking_like_percent = hiking_like_percent,
-							infant_like_percent = infant_like_percent,
-							studying_like_percent = studying_like_percent,
-							celebrate_like_percent = celebrate_like_percent,
-							firework_like_percent = firework_like_percent,
-							nightclub_like_percent = nightclub_like_percent,
-							sports_like_percent = sports_like_percent,
-							depressed_like_percent = depressed_like_percent,
-							lonely_like_percent = lonely_like_percent,
-							selfie_like_percent = selfie_like_percent,
-							building_like_percent = building_like_percent,
-							delicious_like_percent = delicious_like_percent,
-							books_like_percent = books_like_percent,
+							# hiking_like_percent = hiking_like_percent,
+							# infant_like_percent = infant_like_percent,
+							# studying_like_percent = studying_like_percent,
+							# celebrate_like_percent = celebrate_like_percent,
+							# firework_like_percent = firework_like_percent,
+							# nightclub_like_percent = nightclub_like_percent,
+							# sports_like_percent = sports_like_percent,
+							# depressed_like_percent = depressed_like_percent,
+							# lonely_like_percent = lonely_like_percent,
+							# selfie_like_percent = selfie_like_percent,
+							# building_like_percent = building_like_percent,
+							# delicious_like_percent = delicious_like_percent,
+							# books_like_percent = books_like_percent,
+							user_total_like = user_total_like,
 
 						    imgUrl = profile
 						)
 					except:
 						err_cnt +=1
 						print(ig_account)
-			print(err_cnt)
+			print('hehehe:',err_cnt)
 
 
 
@@ -489,11 +440,15 @@ def test(request):
 	data = {'gg': "intro.html"}
 	return render(request, 'test.html', data)
 def realized(request):
-	df = pd.read_excel("ig_info.xlsx")
+	df = pd.read_excel("insta_info.xlsx")
+	print(request.user.username)
 	uid = myUser.objects.get(igName=request.user.username)
-	o, c, e, a, n = cal_score(df.loc[df['IG帳號'] == uid.igName])
+	u_total_likes = uid.style_hiking_like + uid.style_infant_like + uid.style_studying_like + uid.style_celebrate_like + uid.style_firework_like + uid.style_nightclub_like + uid.style_sports_like + uid.style_depressed_like + uid.style_lonely_like + uid.style_selfie_like + uid.style_building_like + uid.style_delicious_like + uid.style_books_like
 	group = Group.objects.get(groupName="mac")
-	o, c, e, a, n = 0, 0, 0, 0, 0
+	print(uid.igName)
+	print(df)
+	# print(df.loc[df['IG帳號'] == uid.igName])
+	o, c, e, a, n = cal_score(df.loc[df['IG帳號'] == request.user.username])
 	data = {'u_total_likes': u_total_likes, 'gg': "intro.html", "uid": uid, "o": o, "c":c, "e":e, "a":a, "n":n, 'group': group}
 	return render(request, 'realized.html', data)
 	#return render(request, 'realized.html', data)
