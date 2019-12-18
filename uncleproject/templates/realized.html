@@ -25,7 +25,7 @@
                 </div>
                 <div>
                     <h1 class="name" style="font-size: 15px;">總共被按讚次數</h1>
-                    <h1 class="name" style="font-size: 15px;">{{uid.hiking_like_percent}}</h1>
+                    <h1 class="name" style="font-size: 15px;">{{uid.user_total_like}}</h1>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@ function change_display(category){
     create_chart_questionarie()
   }
   else if(category == "group"){
-    var contain_list = ['','container_7','追蹤者讚數分析','container_6','追蹤者風格分析','container_5', '追蹤者性格分析','container_4','追蹤者興趣分析','container_3',]
+    var contain_list = ['官方帳號風格比例','container_6','追蹤者讚數分析','container_8','追蹤者風格分析','container_5', '','container_7','追蹤者興趣分析','container_3','追蹤者性格分析','container_4',]
     for(var l = 0; l < contain_list.length; l++){
       var title = contain_list[l];
       l = l + 1
@@ -82,37 +82,21 @@ function create_chart_group(){
     }
     return colors;
 }());
-Highcharts.chart('container_7', {
+Highcharts.chart('container_5', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Monthly Average Rainfall'
-    },
-    subtitle: {
-        text: 'Source: WorldClimate.com'
+        text: '追蹤者性格分析'
     },
     xAxis: {
-        categories: [
-            'Jan',
-            'Feb',
-            'Mar',
-            'Apr',
-            'May',
-            'Jun',
-            'Jul',
-            'Aug',
-            'Sep',
-            'Oct',
-            'Nov',
-            'Dec'
-        ],
-        crosshair: true
+      categories: ['Openness', 'Conscientiousness','Extraversion','Agreeableness','Neuroticism','lonely', ''],
+      crosshair: true
     },
     yAxis: {
         min: 0,
         title: {
-            text: 'Rainfall (mm)'
+            text: 'people (number)'
         }
     },
     tooltip: {
@@ -130,20 +114,69 @@ Highcharts.chart('container_7', {
         }
     },
     series: [{
-        name: 'Tokyo',
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+        name: 'enphants',
+        data: [Number("{{group.big5_openness}}"), Number("{{group.big5_conscientiousness }}"), Number("{{group.big5_extraversion }}"), Number("{{group.big5_agreeableness }}"), Number("{{group.big5_neuroticism }}")]
 
     }, {
-        name: 'New York',
-        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+        name: 'average',
+        data: [Number("{{average.big5_openness}}"), Number("{{average.big5_conscientiousness }}"), Number("{{average.big5_extraversion }}"), Number("{{average.big5_agreeableness }}"), Number("{{average.big5_neuroticism }}")]
+
+    },{
+        name: 'harley',
+        data: [Number("{{harley.big5_openness}}"), Number("{{harley.big5_conscientiousness }}"), Number("{{harley.big5_extraversion }}"), Number("{{harley.big5_agreeableness }}"), Number("{{harley.big5_neuroticism }}")]
+
+    },{
+        name: 'mac',
+        data: [Number("{{baby.big5_openness}}"), Number("{{baby.big5_conscientiousness }}"), Number("{{baby.big5_extraversion }}"), Number("{{baby.big5_agreeableness }}"), Number("{{baby.big5_neuroticism }}")]
+
+    }]
+});
+Highcharts.chart('container_7', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: '追蹤者風格分析'
+    },
+    xAxis: {
+      categories: ['hiking', 'infant', 'studying', 'celebrate', 'fireworks', 'nightclub', 'sports', 'depressed', 'lonely','selfie', 'building', 'delicious', 'books'],
+      crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'people (number)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'enphants',
+        data: [Number("{{group.style_hiking}}"), Number("{{group.style_infant}}"),Number("{{group.style_studying}}"),Number("{{group.style_celebrate}}"),Number("{{group.style_firework}}"),Number("{{group.style_nightclub }}"),Number("{{group.style_sports}}"),Number("{{group.style_depressed}}"),Number("{{group.style_lonely}}"),Number("{{group.style_selfie}}"),Number("{{group.style_building}}"),Number("{{group.style_delicious}}"),Number("{{group.style_books}}")]
 
     }, {
-        name: 'London',
-        data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
+        name: 'harley',
+        data: [Number("{{harley.style_hiking}}"), Number("{{harley.style_infant}}"),Number("{{harley.style_studying}}"),Number("{{harley.style_celebrate}}"),Number("{{harley.style_firework}}"),Number("{{harley.style_nightclub }}"),Number("{{harley.style_sports}}"),Number("{{harley.style_depressed}}"),Number("{{harley.style_lonely}}"),Number("{{harley.style_selfie}}"),Number("{{harley.style_building}}"),Number("{{harley.style_delicious}}"),Number("{{harley.style_books}}")]
 
-    }, {
-        name: 'Berlin',
-        data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+    },{
+        name: 'M.A.C',
+        data: [Number("{{baby.style_hiking}}"), Number("{{baby.style_infant}}"),Number("{{baby.style_studying}}"),Number("{{baby.style_celebrate}}"),Number("{{baby.style_firework}}"),Number("{{baby.style_nightclub }}"),Number("{{baby.style_sports}}"),Number("{{baby.style_depressed}}"),Number("{{baby.style_lonely}}"),Number("{{baby.style_selfie}}"),Number("{{baby.style_building}}"),Number("{{baby.style_delicious}}"),Number("{{baby.style_books}}")]
+
+    },{
+        name: 'average',
+        data: [Number("{{average.style_hiking}}"), Number("{{average.style_infant}}"),Number("{{average.style_studying}}"),Number("{{average.style_celebrate}}"),Number("{{average.style_firework}}"),Number("{{average.style_nightclub }}"),Number("{{average.style_sports}}"),Number("{{average.style_depressed}}"),Number("{{average.style_lonely}}"),Number("{{average.style_selfie}}"),Number("{{average.style_building}}"),Number("{{average.style_delicious}}"),Number("{{average.style_books}}")]
 
     }]
 });
@@ -152,7 +185,7 @@ Highcharts.chart('container_6', {
       type: 'pie'
     },
     title: {
-      text: '',
+      text: '官方帳號風格比例',
     },
     subtitle: {
       text:'',
@@ -255,12 +288,12 @@ Highcharts.chart('container_6', {
     }
     return colors;
 }());
-  Highcharts.chart('container_5', {
+  Highcharts.chart('container_8', {
     chart: {
       type: 'pie'
     },
     title: {
-      text: '',
+      text: '追蹤者讚數分析',
     },
     subtitle: {
       text:'',

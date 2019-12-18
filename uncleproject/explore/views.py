@@ -99,8 +99,8 @@ def intro(request):
 
 
 
-			usr_list = []
-			group_list = []
+			usr_list = [user_enph, user_mac, user_harley, user_lab]
+			group_list = [group_enph, group_harley, group_mac]
 
 			sheet = pd.read_excel("ig_info.xlsx")
 
@@ -441,15 +441,15 @@ def test(request):
 	return render(request, 'test.html', data)
 def realized(request):
 	df = pd.read_excel("insta_info.xlsx")
-	print(request.user.username)
 	uid = myUser.objects.get(igName=request.user.username)
 	u_total_likes = uid.style_hiking_like + uid.style_infant_like + uid.style_studying_like + uid.style_celebrate_like + uid.style_firework_like + uid.style_nightclub_like + uid.style_sports_like + uid.style_depressed_like + uid.style_lonely_like + uid.style_selfie_like + uid.style_building_like + uid.style_delicious_like + uid.style_books_like
-	group = Group.objects.get(groupName="mac")
-	print(uid.igName)
-	print(df)
-	# print(df.loc[df['IG帳號'] == uid.igName])
+	group = Group.objects.get(groupName="enphants")
+
+	harley = Group.objects.get(groupName="harley")
+	baby = Group.objects.get(groupName="mac")
+	average = Group.objects.get(groupName="average")
 	o, c, e, a, n = cal_score(df.loc[df['IG帳號'] == request.user.username])
-	data = {'u_total_likes': u_total_likes, 'gg': "intro.html", "uid": uid, "o": o, "c":c, "e":e, "a":a, "n":n, 'group': group}
+	data = {'baby':baby,'harley':harley,'average':average,'gg': "intro.html", "uid": uid, "o": o, "c":c, "e":e, "a":a, "n":n, 'group': group}
 	return render(request, 'realized.html', data)
 	#return render(request, 'realized.html', data)
 	if request.user.is_authenticated == True: 
