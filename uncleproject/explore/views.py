@@ -47,6 +47,7 @@ def intro(request):
 		if user is not None and user.is_active:
 			auth.login(request, user)
 			#return HttpResponseRedirect('/realized')
+			#realized(request)
 			return render(request, 'realized.html', data)
 
 	if p == 'register':
@@ -98,8 +99,8 @@ def intro(request):
 
 
 
-			usr_list = [user_lab, user_enph, user_mac, user_harley]
-			group_list = [group_enph, group_mac, group_harley]
+			usr_list = []
+			group_list = []
 
 			sheet = pd.read_excel("ig_info.xlsx")
 
@@ -440,6 +441,7 @@ def test(request):
 	return render(request, 'test.html', data)
 def realized(request):
 	df = pd.read_excel("insta_info.xlsx")
+	print(request.user.username)
 	uid = myUser.objects.get(igName=request.user.username)
 	u_total_likes = uid.style_hiking_like + uid.style_infant_like + uid.style_studying_like + uid.style_celebrate_like + uid.style_firework_like + uid.style_nightclub_like + uid.style_sports_like + uid.style_depressed_like + uid.style_lonely_like + uid.style_selfie_like + uid.style_building_like + uid.style_delicious_like + uid.style_books_like
 	group = Group.objects.get(groupName="mac")
