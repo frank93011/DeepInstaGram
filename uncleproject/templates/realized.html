@@ -21,11 +21,11 @@
             <div style="display: flex;">
                 <div style="width: 30%;">
                     <h1 class="name" style="font-size: 15px;">貼文數量</h1>
-                    <h1 class="name" style="font-size: 15px;">100</h1>
+                    <h1 class="name" style="font-size: 15px;">{{uid.total_post}}</h1>
                 </div>
                 <div>
                     <h1 class="name" style="font-size: 15px;">總共被按讚次數</h1>
-                    <h1 class="name" style="font-size: 15px;">300</h1>
+                    <h1 class="name" style="font-size: 15px;">{{uid.hiking_like_percent}}</h1>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@ function change_display(category){
     create_chart_questionarie()
   }
   else if(category == "group"){
-    var contain_list = ['追蹤者風格分析','container_5', '追蹤者性格分析','container_4','追蹤者興趣分析','container_3',]
+    var contain_list = ['追蹤者讚數分析','container_6','追蹤者風格分析','container_5', '追蹤者性格分析','container_4','追蹤者興趣分析','container_3',]
     for(var l = 0; l < contain_list.length; l++){
       var title = contain_list[l];
       l = l + 1
@@ -72,7 +72,115 @@ function change_display(category){
 function create_chart_group(){
   var pieColors = (function () {
     var colors = [],
-        base = Highcharts.getOptions().colors[0],
+        base = Highcharts.getOptions().colors[7],
+        i;
+
+    for (i = 0; i < 10; i += 1) {
+        // Start out with a darkened base color (negative brighten), and end
+        // up with a much brighter color
+        colors.push(Highcharts.Color(base).brighten((i - 3) / 7).get());
+    }
+    return colors;
+}());
+Highcharts.chart('container_6', {
+    chart: {
+      type: 'pie'
+    },
+    title: {
+      text: '',
+    },
+    subtitle: {
+      text:'',
+    },
+    plotOptions: {
+      pie: {
+        colors: pieColors
+      },
+      series: {
+        dataLabels: {
+          enabled: true,
+          format: '{point.name}: {point.y:.1f}%'
+        }
+      }
+    },
+
+    series: [
+      {
+        name: "Browsers",
+        colorByPoint: true,
+        data: [
+          {
+            name: "hiking",
+            y: Number("{{group.official_hiking_percent}}") * 100,
+            drilldown: "hiking"
+          },
+          {
+            name: "infant",
+            y: Number("{{group.official_infant_percent}}") * 100,
+            drilldown: "infant"
+          },
+          {
+            name: "studying",
+            y: Number("{{group.official_studying_percent}}")* 100,
+            drilldown: "studying"
+          },
+          {
+            name: "celebrate",
+            y: Number("{{group.official_celebrate_percent}}")* 100,
+            drilldown: "celebrate"
+          },
+          {
+            name: "firework",
+            y: Number("{{group.official_firework_percent}}")* 100,
+            drilldown: "firework"
+          },
+          {
+            name: "nightclub",
+            y: Number("{{group.official_nightclub_percent}}")* 100,
+            drilldown: "nightclub"
+          },
+          {
+            name: "sports",
+            y: Number("{{group.official_sports_percent}}")* 100,
+            drilldown: "sports"
+          },
+          {
+            name: "depressed",
+            y: Number("{{group.official_depressed_percent}}")* 100,
+            drilldown: "depressed"
+          },
+          {
+            name: "lonely",
+            y: Number("{{group.official_lonely_percent}}")* 100,
+            drilldown: "lonely"
+          },
+          {
+            name: "selfie",
+            y: Number("{{group.official_selfie_percent}}")* 100,
+            drilldown: "selfie"
+          },
+          {
+            name: "building",
+            y: Number("{{group.official_building_percent}}")* 100,
+            drilldown: "building"
+          },
+          {
+            name: "delicious",
+            y: Number("{{group.official_delicious_percent}}")* 100,
+            drilldown: "delicious"
+          },
+          {
+            name: "books",
+            y: Number("{{group.official_books_percent}}")* 100,
+            drilldown: "books"
+          },
+        ]
+      }
+    ],
+  });
+  var pieColors = (function () {
+    var colors = [],
+        base = Highcharts.getOptions().colors[6],
         i;
 
     for (i = 0; i < 10; i += 1) {
@@ -111,67 +219,67 @@ function create_chart_group(){
         data: [
           {
             name: "hiking",
-            y: Number("{{group.style_hiking}}"),
+            y: Number("{{group.style_hiking}}") * 100,
             drilldown: "hiking"
           },
           {
             name: "infant",
-            y: Number("{{group.style_infant}}"),
+            y: Number("{{group.style_infant}}")* 100,
             drilldown: "infant"
           },
           {
             name: "studying",
-            y: Number("{{group.style_studying}}"),
+            y: Number("{{group.style_studying}}")* 100,
             drilldown: "studying"
           },
           {
             name: "celebrate",
-            y: Number("{{group.style_celebrate}}"),
+            y: Number("{{group.style_celebrate}}")* 100,
             drilldown: "celebrate"
           },
           {
             name: "firework",
-            y: Number("{{group.style_firework}}"),
+            y: Number("{{group.style_firework}}")* 100,
             drilldown: "firework"
           },
           {
             name: "nightclub",
-            y: Number("{{group.style_nightclub}}"),
+            y: Number("{{group.style_nightclub}}")* 100,
             drilldown: "nightclub"
           },
           {
             name: "sports",
-            y: Number("{{group.style_sports}}"),
+            y: Number("{{group.style_sports}}")* 100,
             drilldown: "sports"
           },
           {
             name: "depressed",
-            y: Number("{{group.style_depressed}}"),
+            y: Number("{{group.style_depressed}}")* 100,
             drilldown: "depressed"
           },
           {
             name: "lonely",
-            y: Number("{{group.style_lonely}}"),
+            y: Number("{{group.style_lonely}}")* 100,
             drilldown: "lonely"
           },
           {
             name: "selfie",
-            y: Number("{{group.style_selfie}}"),
+            y: Number("{{group.style_selfie}}")* 100,
             drilldown: "selfie"
           },
           {
             name: "building",
-            y: Number("{{group.style_building}}"),
+            y: Number("{{group.style_building}}")* 100,
             drilldown: "building"
           },
           {
             name: "delicious",
-            y: Number("{{group.style_delicious}}"),
+            y: Number("{{group.style_delicious}}")* 100,
             drilldown: "delicious"
           },
           {
             name: "books",
-            y: Number("{{group.style_books}}"),
+            y: Number("{{group.style_books}}")* 100,
             drilldown: "books"
           },
         ]
@@ -242,7 +350,7 @@ function create_chart_analysis(){
 
   tooltip: {
       shared: true,
-      pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y}</b><br/>'
+      pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:.1f}</b><br/>'
   },
 
   legend: {
@@ -275,7 +383,7 @@ function create_chart_analysis(){
   });
   var pieColors = (function () {
     var colors = [],
-        base = Highcharts.getOptions().colors[2],
+        base = Highcharts.getOptions().colors[3],
         i;
 
     for (i = 0; i < 10; i += 1) {
@@ -314,67 +422,67 @@ function create_chart_analysis(){
         data: [
           {
             name: "hiking",
-            y: Number("{{uid.style_hiking}}"),
+            y: Number("{{uid.style_hiking}}")* 100,
             drilldown: "hiking"
           },
           {
             name: "infant",
-            y: Number("{{uid.style_infant}}"),
+            y: Number("{{uid.style_infant}}")* 100,
             drilldown: "infant"
           },
           {
             name: "studying",
-            y: Number("{{uid.style_studying}}"),
+            y: Number("{{uid.style_studying}}")* 100,
             drilldown: "studying"
           },
           {
             name: "celebrate",
-            y: Number("{{uid.style_celebrate}}"),
+            y: Number("{{uid.style_celebrate}}")* 100,
             drilldown: "celebrate"
           },
           {
             name: "firework",
-            y: Number("{{uid.style_firework}}"),
+            y: Number("{{uid.style_firework}}")* 100,
             drilldown: "firework"
           },
           {
             name: "nightclub",
-            y: Number("{{uid.style_nightclub}}"),
+            y: Number("{{uid.style_nightclub}}")* 100,
             drilldown: "nightclub"
           },
           {
             name: "sports",
-            y: Number("{{uid.style_sports}}"),
+            y: Number("{{uid.style_sports}}")* 100,
             drilldown: "sports"
           },
           {
             name: "depressed",
-            y: Number("{{uid.style_depressed}}"),
+            y: Number("{{uid.style_depressed}}")* 100,
             drilldown: "depressed"
           },
           {
             name: "lonely",
-            y: Number("{{uid.style_lonely}}"),
+            y: Number("{{uid.style_lonely}}")* 100,
             drilldown: "lonely"
           },
           {
             name: "selfie",
-            y: Number("{{uid.style_selfie}}"),
+            y: Number("{{uid.style_selfie}}")* 100,
             drilldown: "selfie"
           },
           {
             name: "building",
-            y: Number("{{uid.style_building}}"),
+            y: Number("{{uid.style_building}}")* 100,
             drilldown: "building"
           },
           {
             name: "delicious",
-            y: Number("{{uid.style_delicious}}"),
+            y: Number("{{uid.style_delicious}}")* 100,
             drilldown: "delicious"
           },
           {
             name: "books",
-            y: Number("{{uid.style_books}}"),
+            y: Number("{{uid.style_books}}")* 100,
             drilldown: "books"
           },
         ]

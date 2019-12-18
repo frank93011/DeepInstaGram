@@ -490,10 +490,15 @@ def test(request):
 	return render(request, 'test.html', data)
 def realized(request):
 	df = pd.read_excel("insta_info.xlsx")
-	uid = myUser.objects.get(igName="linweiiihsuan")
+	uid = myUser.objects.get(igName=request.user.username)
+	u_total_likes = uid.style_hiking_like + uid.style_infant_like + uid.style_studying_like + uid.style_celebrate_like + uid.style_firework_like + uid.style_nightclub_like + uid.style_sports_like + uid.style_depressed_like + uid.style_lonely_like + uid.style_selfie_like + uid.style_building_like + uid.style_delicious_like + uid.style_books_like
 	group = Group.objects.get(groupName="mac")
+	print(uid.igName)
+	print(df)
+	print(df.loc[df['IG帳號'] == uid.igName])
 	o, c, e, a, n = cal_score(df.loc[df['IG帳號'] == uid.igName])
-	data = {'gg': "intro.html", "uid": uid, "o": o, "c":c, "e":e, "a":a, "n":n, 'group': group}
+	data = {'u_total_likes': u_total_likes, 'gg': "intro.html", "uid": uid, "o": o, "c":c, "e":e, "a":a, "n":n, 'group': group}
+	print(data)
 	return render(request, 'realized.html', data)
 	#return render(request, 'realized.html', data)
 	if request.user.is_authenticated == True: 
