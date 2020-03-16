@@ -12,7 +12,7 @@ To run the project, please enter the venv and activate the environment. Then run
 then open your browser and open: http://127.0.0.1:8000/
 
 ## Demo Video
-{%youtube 1CAoO7Lk6Ms %}
+[![DIG Demo video](http://img.youtube.com/vi/1CAoO7Lk6Ms/0.jpg)](https://www.youtube.com/watch?v=1CAoO7Lk6Ms)
 ## Motivation
 * Can we reveal our true personality based on what we post on social media?
 * Can computer identify a "Style" of a photo?
